@@ -1,1 +1,16 @@
-<p>courses works!</p>
+<div>
+  <p>Courses</p>
+  <form>
+    <input type="text" placeholder="Filter by course name" #filter />
+    <button class="filer-button" type="button">
+      <i class="fa-solid fa-filter"></i>
+    </button>
+  </form>
+  <h1>COURSES TABLE</h1>
+  <div class="list-box" *ngFor="let courses of coursesList">
+    <p>{{ courses.id }}</p>
+    <p>{{ courses.name }}</p>
+    <p>{{ courses.semester }}</p>
+    <p>{{ courses.name }}</p>
+  </div>
+</div>
