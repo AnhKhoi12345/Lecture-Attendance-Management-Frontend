@@ -1,16 +1,45 @@
-<div>
-  <p>Courses</p>
-  <form>
-    <input type="text" placeholder="Filter by course name" #filter />
-    <button class="filer-button" type="button">
+<div class="courses-content">
+  <a class="link" [routerLink]="['/']">Courses</a>
+  <form class="courses-search">
+    <input
+      class="search-bar"
+      type="text"
+      placeholder="Filter by course name"
+      (input)="filterResults(filter.value)"
+      #filter
+    />
+    <button class="filter-button" type="button">
       <i class="fa-solid fa-filter"></i>
+      Filter
     </button>
   </form>
-  <h1>COURSES TABLE</h1>
-  <div class="list-box" *ngFor="let courses of coursesList">
-    <p>{{ courses.id }}</p>
-    <p>{{ courses.name }}</p>
-    <p>{{ courses.semester }}</p>
-    <p>{{ courses.name }}</p>
+  <div class="list-container">
+    <div class="column-name">
+      <p class="course-id">ID</p>
+      <p class="course-name">NAME</p>
+      <p class="course-semester">SEMESTER</p>
+      <p class="course-lecturer">LECTURER</p>
+      <p class="course-status">STATUS</p>
+    </div>
+    <div class="list-data" *ngFor="let courses of filteredCourses">
+      <a routerLink="/courses/{{ courses.id }}">
+        <div class="row-data">
+          <div class="column data-id">{{ courses.id }}</div>
+          <div class="column data-name">{{ courses.name }}</div>
+          <div class="column data-semester">{{ courses.semester }}</div>
+          <div class="column data-lecturer">{{ courses.lecturer }}</div>
+          <div
+            [ngClass]="{
+              active: courses.active === false,
+              inactive: courses.active === true
+            }"
+            class="column data-status"
+          >
+            {{ courses.active == true ? "Ongoing" : "Finished" }}
+          </div>
+        </div>
+      </a>
+      <hr />
+    </div>
   </div>
 </div>

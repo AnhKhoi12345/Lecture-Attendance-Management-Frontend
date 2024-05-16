@@ -1,0 +1,29 @@
+.header-container {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  //   flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+  height: 120px;
+  //   padding-top: 20px;
+  background-color: rgb(241, 236, 236);
+  border: 1px solid green;
+  padding-left: 50px;
+  padding-right: 50px;
+  align-items: center;
+  //   margin-bottom: 100px;
+  .image-container {
+    cursor: pointer;
+    // border: 1px solid greenyellow;
+    width: 300px;
+    height: 86px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .account-container {
+    // border: 1px solid rgb(180, 46, 46);
+  }
+}
