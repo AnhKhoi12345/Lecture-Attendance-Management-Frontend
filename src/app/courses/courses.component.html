@@ -22,7 +22,7 @@
       <p class="course-status">STATUS</p>
     </div>
     <div class="list-data" *ngFor="let courses of filteredCourses">
-      <a routerLink="/courses/{{ courses.id }}">
+      <a [routerLink]="['/courses', courses.id]">
         <div class="row-data">
           <div class="column data-id">{{ courses.id }}</div>
           <div class="column data-name">{{ courses.name }}</div>

@@ -17,7 +17,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'courses/:Id',
+    path: 'courses/:id',
     component: ClassesComponent,
     title: 'Classes',
     pathMatch: 'full',
@@ -29,7 +29,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'courses/:courseId/:classId',
+    path: 'courses/:id/:id',
     component: ClassAttendanceComponent,
     title: 'Class Attendance',
     pathMatch: 'full',

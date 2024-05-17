@@ -1,4 +1,5 @@
 import { CoursesList } from './interfaces/coursesList';
+import { Classes } from './interfaces/classesList';
 export const fakeCourses: CoursesList[] = [
   {
     id: 1,
@@ -27,5 +28,37 @@ export const fakeCourses: CoursesList[] = [
     semester: 'Summer 2021',
     lecturer: 'Nguyen Tuan Duc',
     active: true,
+  },
+];
+export const fakeClass: Classes[] = [
+  {
+    module_id: 1,
+    class_date: '25-12-2021',
+    start_time: '9AM',
+    end_time: '12AM',
+  },
+  {
+    module_id: 2,
+    class_date: '25-12-2021',
+    start_time: '9AM',
+    end_time: '12AM',
+  },
+  {
+    module_id: 3,
+    class_date: '25-12-2021',
+    start_time: '9AM',
+    end_time: '12AM',
+  },
+  {
+    module_id: 4,
+    class_date: '12-1-2022',
+    start_time: '9AM',
+    end_time: '12AM',
+  },
+  {
+    module_id: 4,
+    class_date: '19-1-2022',
+    start_time: '9AM',
+    end_time: '12AM',
   },
 ];

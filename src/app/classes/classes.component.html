@@ -1,1 +1,34 @@
-<p>classes works!</p>
+<div class="class-content">
+  <span class="class-link"
+    ><a class="class-link" [routerLink]="['/']">Courses</a> >>
+    <a class="class-link" [routerLink]="['/Courses/:id']"
+      >{{ courses?.name }}'s Classes</a
+    ></span
+  >
+
+  <div class="course-information">
+    <h2 class="course-name">Course: {{ courses?.name }}</h2>
+    <h2 class="course-semester">Semester: {{ courses?.semester }}</h2>
+    <h2 class="course-lecturer">Lecturer: {{ courses?.lecturer }}</h2>
+  </div>
+  <hr />
+  <div class="class-container">
+    <div class="column-name">
+      <p class="class-number">Class Number</p>
+      <p class="class-date">Date</p>
+      <p class="class-time">Time</p>
+    </div>
+    <div class="class-data" *ngFor="let class of class; index as i">
+      <a [routerLink]="['/courses', class.module_id, class.class_date]">
+        <div class="row-data">
+          <div class="column data-number">{{ i + 1 }}</div>
+          <div class="column data-date">{{ class.class_date }}</div>
+          <div class="column data-time">
+            {{ class.start_time }} - {{ class.end_time }}
+          </div>
+        </div>
+      </a>
+      <hr />
+    </div>
+  </div>
+</div>
