@@ -7,11 +7,19 @@
   }
   .courses-search {
     margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     .search-bar {
       height: 40px;
       width: 500px;
       padding-left: 15px;
       border-radius: 10px;
+    }
+    .checkbox {
+      scale: 2;
+      margin-right: 10px;
+      margin-left: 30px;
     }
     .filter-button {
       height: 40px;
@@ -27,7 +35,7 @@
       display: flex;
       justify-content: space-between;
       .course-id {
-        flex: 1;
+        flex: 2;
       }
       .course-name {
         flex: 5;
@@ -56,7 +64,7 @@
           color: red;
         }
         .data-id {
-          flex: 1;
+          flex: 2;
         }
         .data-name {
           flex: 5;
