@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CoursesList } from '../interfaces/coursesList';
 import { fakeCourses } from '../fake-data';
 import { CommonModule } from '@angular/common';
@@ -12,25 +12,56 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  // finished: boolean = true;
-  // ongoing: boolean = true;
+  finished: boolean = true;
+  ongoing: boolean = true;
   coursesList: CoursesList[] = [];
   filteredCourses: CoursesList[] = [];
-  constructor() {}
+  emptyList: CoursesList[] = [];
+  constructor() {
+    this.emptyList = [
+      {
+        id: 0,
+        name: 'No course found',
+        semester: '',
+        lecturer: '',
+        active: false,
+      },
+    ];
+  }
   ngOnInit(): void {
     this.coursesList = fakeCourses;
     this.filteredCourses = fakeCourses;
   }
-  filterResults(text: string) {
-    // if (!text) {
-    //   this.filteredCourses = this.coursesList;
-    //   return;
-    // }
-    this.filteredCourses = this.coursesList.filter(
-      (coursesList) =>
-        coursesList?.name.toLowerCase().includes(text.toLowerCase()) ||
-        coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
-        coursesList?.semester.toLowerCase().includes(text.toLowerCase())
-    );
+  filterResults(text?: string) {
+    if (!text) {
+      this.filteredCourses = this.coursesList;
+    } else if (text) {
+      this.filteredCourses = this.coursesList.filter(
+        (coursesList) =>
+          coursesList?.name.toLowerCase().includes(text.toLowerCase()) ||
+          coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
+          coursesList?.semester.toLowerCase().includes(text.toLowerCase())
+      );
+    }
+    if (this.finished && this.ongoing) {
+      this.filteredCourses = this.filteredCourses.filter(
+        (coursesList) =>
+          coursesList?.active === true || coursesList?.active === false
+      );
+      return;
+    } else if (this.finished && !this.ongoing) {
+      this.filteredCourses = this.filteredCourses.filter(
+        (coursesList) => coursesList?.active === false
+      );
+      return;
+    } else if (!this.finished && this.ongoing) {
+      this.filteredCourses = this.filteredCourses.filter(
+        (coursesList) => coursesList?.active === true
+      );
+      return;
+    } else if (!this.finished && !this.ongoing) {
+      this.filteredCourses = this.emptyList;
+      return;
+    } else return;
   }
 }

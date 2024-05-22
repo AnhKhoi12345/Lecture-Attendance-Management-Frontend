@@ -37,8 +37,11 @@
       .course-id {
         flex: 2;
       }
+      .course-code {
+        flex: 2;
+      }
       .course-name {
-        flex: 5;
+        flex: 6;
       }
       .course-semester {
         flex: 2;
@@ -66,8 +69,11 @@
         .data-id {
           flex: 2;
         }
+        .data-code {
+          flex: 2;
+        }
         .data-name {
-          flex: 5;
+          flex: 6;
         }
         .data-semester {
           flex: 2;

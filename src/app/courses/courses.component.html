@@ -18,13 +18,13 @@
       />
       <span>Default</span>
     </div> -->
-    <!-- <div>
+    <div>
       <input
         name="finished"
         class="checkbox"
         type="checkbox"
         [(ngModel)]="finished"
-        (change)="ongoing = false"
+        (change)="filterResults(filter.value)"
       />
       <span>Finished</span>
     </div>
@@ -34,10 +34,10 @@
         class="checkbox"
         type="checkbox"
         [(ngModel)]="ongoing"
-        (change)="finished = false"
+        (change)="filterResults(filter.value)"
       />
       <span>Ongoing</span>
-    </div> -->
+    </div>
     <!-- <button class="filter-button" type="button">
       <i class="fa-solid fa-filter"></i>
       Filter
@@ -45,7 +45,8 @@
   </form>
   <div class="list-container">
     <div class="column-name">
-      <p class="course-id">MODULE INDEX</p>
+      <p class="course-id">MODULE NO.</p>
+      <p class="course-code">MODULE CODE</p>
       <p class="course-name">MODULE NAME</p>
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
@@ -55,7 +56,10 @@
       <a [routerLink]="['/courses', courses.id]">
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
-          <div class="column data-name">{{ courses.name }}</div>
+          <div class="column data-code">
+            {{ courses.name.split("(")[1].split(")")[0] }}
+          </div>
+          <div class="column data-name">{{ courses.name.split("(")[0] }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
           <div
