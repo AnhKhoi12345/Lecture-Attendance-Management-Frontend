@@ -46,23 +46,23 @@
   <div class="list-container">
     <div class="column-name">
       <p class="course-id">MODULE NO.</p>
-      <p class="course-code">MODULE CODE</p>
+      <!-- <p class="course-code">MODULE CODE</p> -->
       <p class="course-name">MODULE NAME</p>
-      <p class="course-semester">SEMESTER</p>
+      <!-- <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
-      <p class="course-status">STATUS</p>
+      <p class="course-status">STATUS</p> -->
     </div>
     <div class="list-data" *ngFor="let courses of filteredCourses; index as i">
-      <a [routerLink]="['/courses', courses.id]">
+      <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
-          <div class="column data-code">
+          <!-- <div class="column data-code">
             {{ courses.name.split("(")[1].split(")")[0] }}
-          </div>
-          <div class="column data-name">{{ courses.name.split("(")[0] }}</div>
-          <div class="column data-semester">{{ courses.semester }}</div>
-          <div class="column data-lecturer">{{ courses.lecturer }}</div>
-          <div
+          </div> -->
+          <div class="column data-name">{{ courses.name }}</div>
+          <!-- <div class="column data-semester">{{ courses.semester }}</div>
+          <div class="column data-lecturer">{{ courses.lecturer }}</div> -->
+          <!-- <div
             [ngClass]="{
               active: courses.active === false,
               inactive: courses.active === true
@@ -70,7 +70,7 @@
             class="column data-status"
           >
             {{ courses.active == true ? "Ongoing" : "Finished" }}
-          </div>
+          </div> -->
         </div>
       </a>
       <hr />
