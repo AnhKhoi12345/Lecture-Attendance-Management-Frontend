@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CoursesList } from '../interfaces/coursesList';
+// import { CoursesList } from '../interfaces/coursesList';
 // import { fakeCourses } from '../fake-data';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Classes } from '../interfaces/classesList';
-import { fakeClass } from '../fake-data';
+import { CoursesService } from '../courses.service';
 @Component({
   selector: 'app-classes',
   standalone: true,
@@ -14,22 +14,29 @@ import { fakeClass } from '../fake-data';
   styleUrl: './classes.component.scss',
 })
 export class ClassesComponent {
-  // class: Classes[] = [];
+  class: Classes[] = [];
   // courses: CoursesList | undefined;
-  // route: ActivatedRoute = inject(ActivatedRoute);
+  route: ActivatedRoute = inject(ActivatedRoute);
   // courseID!: number;
   // fullClass: Classes[] = [];
+  coursesService: CoursesService = inject(CoursesService);
   constructor() {
-  //   this.fullClass = fakeClass;
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //   if (id) {
-  //     this.courseID = +id; // Convert to number
-  //   }
-  //   this.courses = fakeCourses.find((courses) => courses.id === this.courseID);
-  // } // private route: ActivatedRoute
-  // ngOnInit(): void {
-  //   this.class = this.fullClass.filter(
-  //     (fullClass) => fullClass?.module_id === this.courseID
-  //   );
+
+
+
+    // this.fullClass = ;
+    // this.id = this.route.snapshot.paramMap.get('id');
+    // if (id) {
+    //   this.courseID = +id; // Convert to number
+    // }
+    // this.courses = fakeCourses.find((courses) => courses.id === this.courseID);
+  } // private route: ActivatedRoute
+  ngOnInit(): void {
+    
+    const id = this.route.snapshot.paramMap.get('id')!;
+    // this.class = fakeClass.find(
+    //   (class) => class?.module_id === id
+    // );
+    this.coursesService.getClasses(id).subscribe(classes => this.class = classes);
   }
 }

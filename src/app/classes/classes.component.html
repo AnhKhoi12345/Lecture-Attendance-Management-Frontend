@@ -1,15 +1,15 @@
 <div class="class-content">
-  <!-- <span class="class-link"
+  <span class="class-link"
     ><a class="class-link" [routerLink]="['/']">Courses</a> >>
     <a class="class-link" [routerLink]="['/Courses/:id']"
-      >{{ courses?.name }}'s Classes</a
+      >{{ class[0].name }}'s Classes</a
     ></span
   >
 
   <div class="course-information">
-    <h2 class="course-name">Course: {{ courses?.name }}</h2>
-    <h2 class="course-semester">Semester: {{ courses?.semester }}</h2>
-    <h2 class="course-lecturer">Lecturer: {{ courses?.lecturer }}</h2>
+    <h2 class="course-name">Course: {{ class[0].name }}</h2>
+    <h2 class="course-semester">Semester: {{ class[0].semester }}</h2>
+    <h2 class="course-lecturer">Lecturer: {{ class[0].lecturer }}</h2>
   </div>
   <hr />
   <div class="class-container">
@@ -30,6 +30,6 @@
       </a>
       <hr />
     </div>
-  </div> -->
-   classes page under maintenance, connecting real classes database from mysql
+  </div>
+   <!-- classes page under maintenance, connecting real classes database from mysql -->
 </div>

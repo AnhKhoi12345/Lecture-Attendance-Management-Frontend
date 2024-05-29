@@ -18,7 +18,7 @@
       />
       <span>Default</span>
     </div> -->
-    <div>
+    <!-- <div>
       <input
         name="finished"
         class="checkbox"
@@ -37,7 +37,7 @@
         (change)="filterResults(filter.value)"
       />
       <span>Ongoing</span>
-    </div>
+    </div> -->
     <!-- <button class="filter-button" type="button">
       <i class="fa-solid fa-filter"></i>
       Filter
@@ -48,9 +48,9 @@
       <p class="course-id">MODULE NO.</p>
       <!-- <p class="course-code">MODULE CODE</p> -->
       <p class="course-name">MODULE NAME</p>
-      <!-- <p class="course-semester">SEMESTER</p>
+      <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
-      <p class="course-status">STATUS</p> -->
+      <!-- <p class="course-status">STATUS</p> -->
     </div>
     <div class="list-data" *ngFor="let courses of filteredCourses; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
@@ -60,8 +60,8 @@
             {{ courses.name.split("(")[1].split(")")[0] }}
           </div> -->
           <div class="column data-name">{{ courses.name }}</div>
-          <!-- <div class="column data-semester">{{ courses.semester }}</div>
-          <div class="column data-lecturer">{{ courses.lecturer }}</div> -->
+          <div class="column data-semester">{{ courses.semester }}</div>
+          <div class="column data-lecturer">{{ courses.lecturer }}</div>
           <!-- <div
             [ngClass]="{
               active: courses.active === false,

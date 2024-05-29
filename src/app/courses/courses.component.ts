@@ -40,9 +40,9 @@ export class CoursesComponent {
     } else if (text) {
       this.filteredCourses = this.coursesList.filter(
         (coursesList) =>
-          coursesList?.name.toLowerCase().includes(text.toLowerCase()) 
-          // coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
-          // coursesList?.semester.toLowerCase().includes(text.toLowerCase())
+          coursesList?.name.toLowerCase().includes(text.toLowerCase()) ||
+          coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
+          coursesList?.semester.toLowerCase().includes(text.toLowerCase())
       );
     }
     // if (this.finished && this.ongoing) {
