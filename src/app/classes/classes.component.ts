@@ -1,6 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-// import { CoursesList } from '../interfaces/coursesList';
-// import { fakeCourses } from '../fake-data';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,28 +13,13 @@ import { CoursesService } from '../courses.service';
 })
 export class ClassesComponent {
   class: Classes[] = [];
-  // courses: CoursesList | undefined;
   route: ActivatedRoute = inject(ActivatedRoute);
-  // courseID!: number;
-  // fullClass: Classes[] = [];
   coursesService: CoursesService = inject(CoursesService);
+  id!: string;
   constructor() {
-
-
-
-    // this.fullClass = ;
-    // this.id = this.route.snapshot.paramMap.get('id');
-    // if (id) {
-    //   this.courseID = +id; // Convert to number
-    // }
-    // this.courses = fakeCourses.find((courses) => courses.id === this.courseID);
-  } // private route: ActivatedRoute
+     this.id = this.route.snapshot.paramMap.get('courseId')!;
+  }
   ngOnInit(): void {
-    
-    const id = this.route.snapshot.paramMap.get('id')!;
-    // this.class = fakeClass.find(
-    //   (class) => class?.module_id === id
-    // );
-    this.coursesService.getClasses(id).subscribe(classes => this.class = classes);
+    this.coursesService.getClasses(this.id).subscribe(classes => this.class = classes);
   }
 }

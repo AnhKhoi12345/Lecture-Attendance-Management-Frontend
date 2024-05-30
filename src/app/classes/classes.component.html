@@ -1,10 +1,10 @@
 <div class="class-content">
-  <span class="class-link"
-    ><a class="class-link" [routerLink]="['/']">Courses</a> >>
-    <a class="class-link" [routerLink]="['/Courses/:id']"
-      >{{ class[0].name }}'s Classes</a
-    ></span
-  >
+  <span class="class-link">
+    <a class="class-link" [routerLink]="['/']">Courses</a> >>
+    <a class="class-link" [routerLink]="['/Courses/:id']">
+      {{ class[0].name }}'s Classes
+    </a>
+      </span>
 
   <div class="course-information">
     <h2 class="course-name">Course: {{ class[0].name }}</h2>
@@ -14,15 +14,15 @@
   <hr />
   <div class="class-container">
     <div class="column-name">
-      <p class="class-number">Class Number</p>
-      <p class="class-date">Date</p>
-      <p class="class-time">Time</p>
+      <p class="class-number">CLASS NUMBER</p>
+      <p class="class-date">DATE</p>
+      <p class="class-time">TIME</p>
     </div>
     <div class="class-data" *ngFor="let class of class; index as i">
       <a [routerLink]="['/courses', class.module_id, class.class_date]">
         <div class="row-data">
           <div class="column data-number">{{ i + 1 }}</div>
-          <div class="column data-date">{{ class.class_date }}</div>
+          <div class="column data-date">{{ class.class_date.split("T")[0] }}</div>
           <div class="column data-time">
             {{ class.start_time }} - {{ class.end_time }}
           </div>
