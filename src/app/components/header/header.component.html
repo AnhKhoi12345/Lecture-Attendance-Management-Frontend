@@ -7,7 +7,9 @@
     <img src="../../../assets/images/VGU-Logo.png" alt="vgu logo" />
   </a>
   <div class="account-container">
-    <span class="name">HOANG NGOC ANH KHOI, </span>
+    <span class="name">
+      {{authService.currentUserSig()?.username}}
+    </span>
     <span class="role">Student</span>
   </div>
 </div>

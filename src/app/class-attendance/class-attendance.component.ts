@@ -1,9 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-// import { CoursesList } from '../interfaces/coursesList';
-// import { fakeCourses } from '../fake-data';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-class-attendance',
   standalone: true,

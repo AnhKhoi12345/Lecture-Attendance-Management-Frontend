@@ -3,11 +3,25 @@ import { CoursesComponent } from './courses/courses.component';
 import { ClassesComponent } from './classes/classes.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: '/courses',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'Register',
     pathMatch: 'full',
   },
   {
