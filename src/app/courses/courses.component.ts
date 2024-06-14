@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CoursesService } from '../courses.service';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-courses',
   standalone: true,
@@ -19,6 +20,7 @@ export class CoursesComponent {
   filteredCourses: CoursesList[] = [];
   emptyList: CoursesList[] = [];
   coursesService: CoursesService = inject(CoursesService);
+  authService = inject(AuthService);
   constructor() {
     // this.emptyList = [
     //   {

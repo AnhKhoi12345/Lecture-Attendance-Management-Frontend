@@ -1,3 +1,4 @@
+@if(authService.currentUserSig()) {
 <div class="courses-content">
   <a class="link" [routerLink]="['/']">Courses</a>
   <form class="courses-search">
@@ -77,3 +78,4 @@
     </div>
   </div>
 </div>
+}

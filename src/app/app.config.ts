@@ -3,11 +3,9 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth} from '@angular/fire/auth';
 import { provideClientHydration } from '@angular/platform-browser';
 import { withFetch } from '@angular/common/http';
-import { environment } from '../environments/environment';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBoq4KOOID6PuFETi-SideQHX78mJvpnbY",
