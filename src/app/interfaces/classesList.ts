@@ -1,5 +1,5 @@
 export interface Classes {
-  class_date: string;
+  class_date: Date;
   start_time: string;
   end_time: string;
   module_id: string;

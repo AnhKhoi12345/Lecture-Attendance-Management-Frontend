@@ -1,1 +1,48 @@
-<p>class-attendance works!</p>
+@if(authService.currentUserSig()) {
+<div class="attendance-content">
+    <span class="attendance-link">
+      <a class="attendance-link" [routerLink]="['/']">Courses</a> >>
+      <a class="class-link" [routerLink]="['/courses/', attendanceList[0].module_id]">
+        {{ attendanceList[0].module_name }}'s Classes
+      </a> >>
+      <a [routerLink]="['/courses', attendanceList[0].module_id, attendanceList[0].class_date  ]">
+        {{ attendanceList[0].module_name }}'s Classes
+      </a>
+        </span>
+  
+    <div class="course-information">
+      <h2 class="course-name">Course: {{ attendanceList[0].module_name }}</h2>
+      <h2 class="course-semester">Semester: {{ attendanceList[0].semester }}</h2>
+      <h2 class="course-lecturer">Lecturer: {{ attendanceList[0].lecturer }}</h2>
+    </div>
+    <div class="course-information">
+        <h2 class="course-name">Date: {{ attendanceList[0].class_date}}</h2>
+        <h2 class="course-semester">Start: {{ attendanceList[0].start_time }}</h2>
+        <h2 class="course-lecturer">End: {{ attendanceList[0].end_time }}</h2>
+      </div>
+    <hr />
+    <div class="attendance-container">
+      <div class="column-name">
+        <p class="class-number">STUDENT NUMBER</p>
+        <p class="class-date">STUDENT ID</p>
+        <p class="class-time">STUDENT NAME</p>
+        <p class="class-action">ACTION</p>
+      </div>
+      <div class="attendance-data" *ngFor="let attendance of attendanceList; index as i">
+        <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
+          <div class="row-data">
+            <div class="column data-number">{{ i + 1 }}</div>
+            <div class="column data-date">{{ attendance.student_id }}</div>
+            <div class="column data-time">
+              {{ attendance.student_name }}
+            </div>
+            <div class="column action">
+                <button class="button-checking" (click)="requestChecking()">Request Checking</button>
+              </div>
+          </div>
+        <!-- </a> -->
+        <hr />
+      </div>
+    </div>
+  </div>
+}

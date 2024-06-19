@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Classes } from '../interfaces/classesList';
 import { CoursesService } from '../courses.service';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-classes',
   standalone: true,
@@ -12,6 +13,7 @@ import { CoursesService } from '../courses.service';
   styleUrl: './classes.component.scss',
 })
 export class ClassesComponent {
+  authService = inject(AuthService);
   class: Classes[] = [];
   route: ActivatedRoute = inject(ActivatedRoute);
   coursesService: CoursesService = inject(CoursesService);

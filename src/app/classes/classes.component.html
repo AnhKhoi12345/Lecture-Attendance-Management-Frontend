@@ -1,7 +1,8 @@
+@if(authService.currentUserSig()) {
 <div class="class-content">
   <span class="class-link">
     <a class="class-link" [routerLink]="['/']">Courses</a> >>
-    <a class="class-link" [routerLink]="['/Courses/:id']">
+    <a class="class-link" [routerLink]="['/courses/', class[0].module_id]">
       {{ class[0].name }}'s Classes
     </a>
       </span>
@@ -19,10 +20,10 @@
       <p class="class-time">TIME</p>
     </div>
     <div class="class-data" *ngFor="let class of class; index as i">
-      <a [routerLink]="['/courses', class.module_id, class.class_date]">
+      <a [routerLink]="['/courses', class.module_id, class.class_date  ]">
         <div class="row-data">
           <div class="column data-number">{{ i + 1 }}</div>
-          <div class="column data-date">{{ class.class_date.split("T")[0] }}</div>
+          <div class="column data-date">{{ class.class_date}}</div>
           <div class="column data-time">
             {{ class.start_time }} - {{ class.end_time }}
           </div>
@@ -33,3 +34,4 @@
   </div>
    <!-- classes page under maintenance, connecting real classes database from mysql -->
 </div>
+}
