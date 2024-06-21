@@ -4,6 +4,9 @@
 }
 <form [formGroup] = "form" (ngSubmit) = "onSubmit()">
     <div>
+        <input type="text" placeholder="School ID" formControlName="schoolId">
+    </div>
+    <div>
         <input type="text" placeholder="Username" formControlName="username">
     </div>
     <div>
@@ -11,6 +14,9 @@
     </div>
     <div>
         <input type="password" placeholder="Password" formControlName="password">
+    </div>
+    <div>
+        <input type="text" placeholder="Role" formControlName="role">
     </div>
     <div>
         <button type="submit">Sign Up</button>

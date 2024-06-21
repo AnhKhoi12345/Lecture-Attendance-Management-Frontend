@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Classes } from './interfaces/classesList';
 import { AuthService } from './auth.service';
 import { AttendanceList } from './interfaces/attendanceList';
+import { UserAccountInterface } from './interfaces/userAccount';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -46,5 +47,12 @@ export class CoursesService {
         })
       })
     })
+  }
+  createAccount(acc_id:string, school_id: string, username:string, email:string, password:string, role: string ): Observable<UserAccountInterface> {
+    return this.http.post<UserAccountInterface>(
+      `/api/accounts`,
+      {acc_id, school_id, username, email, password, role},
+      httpOptions,
+    );
   }
 }
