@@ -23,5 +23,6 @@ export class ClassesComponent {
   }
   ngOnInit(): void {
     this.coursesService.getClasses(this.id).subscribe(classes => this.class = classes);
+    // console.log("this class is: " + this.class);
   }
 }

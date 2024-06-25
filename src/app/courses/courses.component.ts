@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CoursesService } from '../courses.service';
 import { AuthService } from '../auth.service';
+import { UserAccountInterface } from '../interfaces/userAccount';
 @Component({
   selector: 'app-courses',
   standalone: true,
@@ -18,9 +19,12 @@ export class CoursesComponent {
   ongoing: boolean = true;
   coursesList: CoursesList[] = [];
   filteredCourses: CoursesList[] = [];
-  emptyList: CoursesList[] = [];
+  // emptyList: CoursesList[] = [];
   coursesService: CoursesService = inject(CoursesService);
   authService = inject(AuthService);
+  account: UserAccountInterface[] = []
+  lecturerModuleList: CoursesList[] = [];
+  filteredLecturerModules: CoursesList[] = [];
   constructor() {
     // this.emptyList = [
     //   {
@@ -33,8 +37,11 @@ export class CoursesComponent {
     // ];
   }
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe(courses => this.coursesList = courses);
-    this.coursesService.getCourses().subscribe(courses => this.filteredCourses = courses);
+    this.coursesService.getAccount().subscribe(account => this.account = account);
+    this.coursesService.getStudentModule().subscribe(courses => this.coursesList = courses);
+    this.coursesService.getStudentModule().subscribe(courses => this.filteredCourses = courses);
+    this.coursesService.getLecturerModule().subscribe(courses => this.lecturerModuleList = courses);
+    this.coursesService.getLecturerModule().subscribe(courses => this.filteredLecturerModules = courses);
   }
   filterResults(text?: string) {
     if (!text) {
@@ -47,6 +54,7 @@ export class CoursesComponent {
           coursesList?.semester.toLowerCase().includes(text.toLowerCase())
       );
     }
+
     // if (this.finished && this.ongoing) {
     //   this.filteredCourses = this.filteredCourses.filter(
     //     (coursesList) =>
@@ -67,5 +75,16 @@ export class CoursesComponent {
     //   this.filteredCourses = this.emptyList;
     //   return;
     // } else return;
+  }
+  filterLecturerResults(text?: string) {
+    if (!text) {
+      this.filteredLecturerModules = this.lecturerModuleList;
+    } else if (text) {
+      this.filteredLecturerModules = this.lecturerModuleList.filter(
+        (list) =>
+          list?.name.toLowerCase().includes(text.toLowerCase()) ||
+        list?.semester.toLowerCase().includes(text.toLowerCase())
+      );
+    }
   }
 }

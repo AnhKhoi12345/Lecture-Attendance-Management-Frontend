@@ -36,7 +36,24 @@ export class CoursesService {
       this.authService.user$.subscribe(user => {
         user && user.getIdToken().then(token => {
           if (user && token){
-             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/user/${user.uid}`, httpOptionsWithAuthToken(token))
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(attendance => {
+              observer.next(attendance);
+             });
+
+          }else{
+            observer.next([]);
+          }
+        })
+      })
+    })
+  }
+  getAttendanceList(courseId:string, classDate:string): Observable<AttendanceList[]> {
+    return new Observable<AttendanceList[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
              .subscribe(attendance => {
               observer.next(attendance);
              });
@@ -55,4 +72,53 @@ export class CoursesService {
       httpOptions,
     );
   }
+  getAccount(): Observable<UserAccountInterface[]> {
+    return new Observable<UserAccountInterface[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+           this.http.get<UserAccountInterface[]>(`/api/account/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(account => {
+              observer.next(account);
+          });
+            }else{
+              observer.next([]);
+            }
+        })
+      })
+    })
+  }
+  getStudentModule(): Observable<CoursesList[]> {
+    return new Observable<CoursesList[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+           this.http.get<CoursesList[]>(`/api/modules/student/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(module => {
+              observer.next(module);
+          });
+            }else{
+              observer.next([]);
+            }
+        })
+      })
+    })
+  }
+  getLecturerModule(): Observable<CoursesList[]> {
+    return new Observable<CoursesList[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+           this.http.get<CoursesList[]>(`/api/modules/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(module => {
+              observer.next(module);
+          });
+            }else{
+              observer.next([]);
+            }
+        })
+      })
+    })
+  }
+
 }
