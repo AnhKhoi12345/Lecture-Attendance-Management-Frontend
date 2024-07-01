@@ -19,6 +19,7 @@ export class ClassAttendanceComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   classDate!: string;
   courseId!: string;
+  classStart!: string;
   attendanceList: AttendanceList[] = [];
   coursesService: CoursesService = inject(CoursesService);
   account: UserAccountInterface[] = []
@@ -26,11 +27,12 @@ export class ClassAttendanceComponent {
   constructor() {
     this.classDate = this.route.snapshot.paramMap.get('classDate')!;
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
+    this.classStart = this.route.snapshot.paramMap.get('classStart')!;
  }
  ngOnInit(): void {
    this.coursesService.getAccount().subscribe(account => this.account = account);
-  this.coursesService.getAttendanceListForStudent(this.courseId, this.classDate).subscribe(attendance => this.attendanceList = attendance);
-  this.coursesService.getAttendanceList(this.courseId, this.classDate).subscribe(attendance => this.allAttendanceList = attendance);
+  this.coursesService.getAttendanceListForStudent(this.courseId, this.classDate,this.classStart).subscribe(attendance => this.attendanceList = attendance);
+  this.coursesService.getAttendanceList(this.courseId, this.classDate,this.classStart).subscribe(attendance => this.allAttendanceList = attendance);
 
 }
 

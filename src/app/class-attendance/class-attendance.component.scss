@@ -28,6 +28,7 @@
         }
         .class-action {
             flex: 3;
+            text-align: center;
           }
       }
       .attendance-data {
@@ -62,6 +63,10 @@
           }
           .action {
             flex: 3;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            // text-align: center;
             // border: 1px solid black;
             .button-checking{
                 background-color: rgb(250, 186, 67);
@@ -83,6 +88,9 @@
             }
             .button-checking:active{
                 color: red;
+            }
+            .certain{
+              background-color: rgb(46, 219, 3);
             }
           }
         }

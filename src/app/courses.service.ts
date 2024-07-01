@@ -7,6 +7,7 @@ import { Classes } from './interfaces/classesList';
 import { AuthService } from './auth.service';
 import { AttendanceList } from './interfaces/attendanceList';
 import { UserAccountInterface } from './interfaces/userAccount';
+import { NotificationsInterface } from './interfaces/notificationList';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -31,12 +32,12 @@ export class CoursesService {
   getClasses(id:string): Observable<Classes[]> {
     return this.http.get<Classes[]>(`/api/modules/${id}`)
   }
-  getAttendanceListForStudent(courseId:string, classDate:string): Observable<AttendanceList[]> {
+  getAttendanceListForStudent(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
     return new Observable<AttendanceList[]>(observer => {
       this.authService.user$.subscribe(user => {
         user && user.getIdToken().then(token => {
           if (user && token){
-             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
              .subscribe(attendance => {
               observer.next(attendance);
              });
@@ -48,12 +49,12 @@ export class CoursesService {
       })
     })
   }
-  getAttendanceList(courseId:string, classDate:string): Observable<AttendanceList[]> {
+  getAttendanceList(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
     return new Observable<AttendanceList[]>(observer => {
       this.authService.user$.subscribe(user => {
         user && user.getIdToken().then(token => {
           if (user && token){
-             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
              .subscribe(attendance => {
               observer.next(attendance);
              });
@@ -120,5 +121,21 @@ export class CoursesService {
       })
     })
   }
+  getAllNotifications(): Observable<NotificationsInterface[]> {
+    return new Observable<NotificationsInterface[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+             this.http.get<NotificationsInterface[]>(`/api/modules/notifications/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(noti => {
+              observer.next(noti);
+             });
 
+          }else{
+            observer.next([]);
+          }
+        })
+      })
+    })
+  }
 }
