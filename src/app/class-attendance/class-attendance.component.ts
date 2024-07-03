@@ -6,15 +6,17 @@ import { AttendanceList } from '../interfaces/attendanceList';
 import { CoursesService } from '../courses.service';
 import { AuthService } from '../auth.service';
 import { UserAccountInterface } from '../interfaces/userAccount';
-
+import { ModelComponent} from '../components/model/model.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-class-attendance',
   standalone: true,
-  imports:  [RouterModule, CommonModule],
+  imports:  [RouterModule, CommonModule,ModelComponent],
   templateUrl: './class-attendance.component.html',
   styleUrl: './class-attendance.component.scss'
 })
 export class ClassAttendanceComponent {
+  router = inject(Router)
   authService = inject(AuthService);
   route: ActivatedRoute = inject(ActivatedRoute);
   classDate!: string;
@@ -24,6 +26,9 @@ export class ClassAttendanceComponent {
   coursesService: CoursesService = inject(CoursesService);
   account: UserAccountInterface[] = []
   allAttendanceList: AttendanceList[] = [];
+  noti_text!: string;
+  // title = 'modal-app';
+  // showModal = false;
   constructor() {
     this.classDate = this.route.snapshot.paramMap.get('classDate')!;
     this.courseId = this.route.snapshot.paramMap.get('courseId')!;
@@ -36,7 +41,16 @@ export class ClassAttendanceComponent {
 
 }
 
- requestChecking(): void {
-  console.log("Request Cheking!");
+ requestChecking(sender:string,sender_id:string,receiver:string,receiver_id:string,module_name:string,semester:string,class_date:Date,start_time:string,end_time:string):void {
+    this.noti_text = `Greeting Prof. ${receiver}, student ${sender} (${sender_id}) want to request checking attendance for module ${module_name}, ${semester} semesrter, class on date ${class_date}, time ${start_time} - ${end_time}. Thank you very much`
+    this.coursesService.sendNotification(sender_id,receiver_id,this.noti_text || "").subscribe(()=>{
+      alert("Your request has been sent! Press OK to return");
+      this.router.navigateByUrl('/');
+    })
+    console.log("sending:" + sender + sender_id + receiver + receiver_id + module_name + semester + class_date + start_time + end_time);
+  
  }
+//  toggleModal = () => {
+//   this.showModal = !this.showModal;
+// }
 }

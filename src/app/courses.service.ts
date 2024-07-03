@@ -138,4 +138,11 @@ export class CoursesService {
       })
     })
   }
+  sendNotification(sender_id:string, receiver_id:string, noti_text:string): Observable<NotificationsInterface> {
+    return this.http.post<NotificationsInterface>(
+      `/api/notification`,
+      {sender_id, receiver_id, noti_text},
+      httpOptions,
+    );
+  }
 }

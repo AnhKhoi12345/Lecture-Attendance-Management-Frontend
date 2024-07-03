@@ -68,6 +68,13 @@
             justify-content: space-between;
             // text-align: center;
             // border: 1px solid black;
+            .dialog{
+              // margin-top: 50px;
+              width: 100vh;
+              height: 80vh;
+              top: 10%;
+              left:25%;
+            }
             .button-checking{
                 background-color: rgb(250, 186, 67);
                 border-radius: 10px;

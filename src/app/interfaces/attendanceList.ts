@@ -5,6 +5,7 @@ export interface AttendanceList {
     module_id: string;
     module_name: string;
     lecturer: string;
+    lecturer_id: string;
     semester: string;
     semester_start_date:string;
     semester_end_date: string;
