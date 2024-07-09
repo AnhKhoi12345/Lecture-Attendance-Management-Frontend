@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  
    fb = inject(FormBuilder);
    http = inject(HttpClient);
    router = inject(Router)
@@ -32,4 +33,5 @@ export class LoginComponent {
  },
  });
    }
+   
 }

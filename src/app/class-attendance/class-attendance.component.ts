@@ -45,9 +45,9 @@ export class ClassAttendanceComponent {
     this.noti_text = `Greeting Prof. ${receiver}, student ${sender} (${sender_id}) want to request checking attendance for module ${module_name}, ${semester} semesrter, class on date ${class_date}, time ${start_time} - ${end_time}. Thank you very much`
     this.coursesService.sendNotification(sender_id,receiver_id,this.noti_text || "").subscribe(()=>{
       alert("Your request has been sent! Press OK to return");
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl(`/courses/${this.courseId}`);
     })
-    console.log("sending:" + sender + sender_id + receiver + receiver_id + module_name + semester + class_date + start_time + end_time);
+    
   
  }
 //  toggleModal = () => {

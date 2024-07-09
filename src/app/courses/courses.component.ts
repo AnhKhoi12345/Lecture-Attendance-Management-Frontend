@@ -25,6 +25,8 @@ export class CoursesComponent {
   account: UserAccountInterface[] = []
   lecturerModuleList: CoursesList[] = [];
   filteredLecturerModules: CoursesList[] = [];
+  allModuleList: CoursesList[] = [];
+  filteredAllModules: CoursesList[] = [];
   constructor() {
     // this.emptyList = [
     //   {
@@ -42,6 +44,8 @@ export class CoursesComponent {
     this.coursesService.getStudentModule().subscribe(courses => this.filteredCourses = courses);
     this.coursesService.getLecturerModule().subscribe(courses => this.lecturerModuleList = courses);
     this.coursesService.getLecturerModule().subscribe(courses => this.filteredLecturerModules = courses);
+    this.coursesService.getCourses().subscribe(courses => this.allModuleList = courses);
+    this.coursesService.getCourses().subscribe(courses => this.filteredAllModules = courses);
   }
   filterResults(text?: string) {
     if (!text) {

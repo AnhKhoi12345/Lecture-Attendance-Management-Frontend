@@ -1,9 +1,6 @@
 @if(authService.currentUserSig() == null){
 
-  <div>
-    <a routerLink = "/login">Login</a>
-    <a routerLink = "/register">Register</a>
-  </div>
+  <app-login></app-login>
   <router-outlet />
 }
 <!-- <div>

@@ -12,12 +12,12 @@ export const routes: Routes = [
     redirectTo: '/courses',
     pathMatch: 'full',
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    title: 'Login',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent,
+  //   title: 'Login',
+  //   pathMatch: 'full',
+  // },
   {
     path: 'register',
     component: RegisterComponent,

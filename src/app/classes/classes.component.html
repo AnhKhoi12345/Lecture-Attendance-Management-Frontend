@@ -23,7 +23,7 @@
       <a [routerLink]="['/courses', class.module_id, class.class_date, class.start_time]">
         <div class="row-data">
           <div class="column data-number">{{ i + 1 }}</div>
-          <div class="column data-date">{{ class.class_date}}</div>
+          <div class="column data-date">{{ class.class_date.toString().split("T")[0]}}</div>
           <div class="column data-time">
             {{ class.start_time }} - {{ class.end_time }}
           </div>

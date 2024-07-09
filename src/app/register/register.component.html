@@ -1,24 +1,33 @@
-<h1>Register</h1>
+@if(authService.currentUserSig()) {
+    <div class="register-container">
+<h1>Register user</h1>
 @if(errorMessage){
     <div>{{errorMessage}}</div>
 }
-<form [formGroup] = "form" (ngSubmit) = "onSubmit()">
+<form class="register-form" [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    <h4>ID:</h4>
     <div>
-        <input type="text" placeholder="School ID" formControlName="schoolId">
+        <input class="register-input" type="text" placeholder="School ID" formControlName="schoolId">
     </div>
+    <h4>Username:</h4>
     <div>
-        <input type="text" placeholder="Username" formControlName="username">
+        <input class="register-input"  type="text" placeholder="Username" formControlName="username">
     </div>
+    <h4>Email:</h4>
     <div>
-        <input type="text" placeholder="Email" formControlName="email">
+        <input class="register-input"  type="text" placeholder="Email" formControlName="email">
     </div>
+    <h4>Password:</h4>
     <div>
-        <input type="password" placeholder="Password" formControlName="password">
+        <input class="register-input"  type="password" placeholder="Password" formControlName="password">
     </div>
+    <h4>Role:</h4>
     <div>
-        <input type="text" placeholder="Role" formControlName="role">
+        <input class="register-input"  type="text" placeholder="Role" formControlName="role">
     </div>
-    <div>
-        <button type="submit">Sign Up</button>
+    <div class="submit-button-container">
+        <button class="register-button" type="submit">Sign Up</button>
     </div>
 </form>
+    </div>
+}

@@ -7,20 +7,21 @@
         {{ attendanceList[0].module_name }}'s Classes
       </a> >>
       <a [routerLink]="['/courses', attendanceList[0].module_id, attendanceList[0].class_date  ]">
-        {{ attendanceList[0].module_name }}'s Classes
+        {{ attendanceList[0].module_name }}'s Classes Attendance Info
       </a>
         </span>
-  
+      <div class="class-info-flexbox">
     <div class="course-information">
       <h2 class="course-name">Course: {{ attendanceList[0].module_name }}</h2>
       <h2 class="course-semester">Semester: {{ attendanceList[0].semester }}</h2>
       <h2 class="course-lecturer">Lecturer: {{ attendanceList[0].lecturer }}</h2>
     </div>
-    <div class="course-information">
-        <h2 class="course-name">Date: {{ attendanceList[0].class_date}}</h2>
+    <div class="class-information">
+        <h2 class="course-name">Date: {{ attendanceList[0].class_date.toString().split("T")[0]}}</h2>
         <h2 class="course-semester">Start: {{ attendanceList[0].start_time }}</h2>
         <h2 class="course-lecturer">End: {{ attendanceList[0].end_time }}</h2>
       </div>
+    </div>
     <hr />
     <div class="attendance-container">
       <div class="column-name">
@@ -39,28 +40,20 @@
             </div>
             <div class="column action">
               <dialog #dialog class="dialog">
-                <div>
-                  Are you sure you want to request checking for: 
+                <div class="dialog-content">
+                  <b>Disclaimer:</b> You can only request checking a lecture 1 time. Please only request checking if you truly present at class that day but the camera system failed to detect you. If your requests rejected for too many time, you might receive a strike for not being truthful. Are you sure you want to request checking for class: 
                   <p>Module: {{attendance.module_name}}</p>
                   <p>Semester: {{attendance.semester}}</p>
                   <p>Lecturer: {{attendance.lecturer}}</p>
                   <p>Date: {{attendance.class_date}}</p>
                   <p>Time: {{attendance.start_time}} - {{attendance.end_time}} </p>
                 </div>
-                <div>
-                  <button (click)="requestChecking(attendance.student_name,attendance.student_id,attendance.lecturer,attendance.lecturer_id,attendance.module_name,attendance.semester,attendance.class_date,attendance.start_time,attendance.end_time)">Submit</button>
-                  <button (click)="dialog.close()">Close</button>
+                <div class="dialog-button-box">
+                  <button class="request-button" (click)="requestChecking(attendance.student_name,attendance.student_id,attendance.lecturer,attendance.lecturer_id,attendance.module_name,attendance.semester,attendance.class_date,attendance.start_time,attendance.end_time)">Submit</button>
+                  <button class="close-button" (click)="dialog.close()">Close</button>
                 </div>
               </dialog>
                 <button class="button-checking"  (click)="dialog.showModal()">Request Checking</button>
-                <!-- <app-model
-    [show]="showModal"
-    customClass="'custom_modal_class'"
-    [closeCallback]="toggleModal()"
-  >
-    <h2>Told Ya!</h2>
-    <iframe title="giphy" src="https://giphy.com/embed/l52CGyJ4LZPa0" width="480" height="273" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/sandler-sentences-sounding-l52CGyJ4LZPa0">via GIPHY</a></p>
-  </app-model> -->
               </div>
           </div>
         <!-- </a> -->
@@ -71,7 +64,7 @@
     </div>
   </div>}
 
-  @if(account[0].role == "lecturer"){
+  @if(account[0].role == "lecturer" || "admin"){
     <div class="attendance-content">
         <span class="attendance-link">
           <a class="attendance-link" [routerLink]="['/']">Courses</a> >>
@@ -79,19 +72,20 @@
             {{ allAttendanceList[0].module_name }}'s Classes
           </a> >>
           <a [routerLink]="['/courses', allAttendanceList[0].module_id, allAttendanceList[0].class_date  ]">
-            {{ allAttendanceList[0].module_name }}'s Classes
+            {{ allAttendanceList[0].module_name }}'s Classes Attendance Info
           </a>
             </span>
-      
+            <div class="class-info-flexbox">
         <div class="course-information">
           <h2 class="course-name">Course: {{ allAttendanceList[0].module_name }}</h2>
           <h2 class="course-semester">Semester: {{ allAttendanceList[0].semester }}</h2>
           <h2 class="course-lecturer">Lecturer: {{ allAttendanceList[0].lecturer }}</h2>
         </div>
         <div class="course-information">
-            <h2 class="course-name">Date: {{ allAttendanceList[0].class_date}}</h2>
+            <h2 class="course-name">Date: {{ allAttendanceList[0].class_date.toString().split("T")[0]}}</h2>
             <h2 class="course-semester">Start: {{ allAttendanceList[0].start_time }}</h2>
             <h2 class="course-lecturer">End: {{ allAttendanceList[0].end_time }}</h2>
+          </div>
           </div>
         <hr />
         <div class="attendance-container">
@@ -110,8 +104,14 @@
                   {{ attendance.student_name }}
                 </div>
                 <div class="column action">
+                  @if(account[0].role == "lecturer"){
                     <button class="button-checking uncertain" >Request Checking</button>
                     <button class="button-checking certain" >Guaranteed Checking</button>
+                  }
+                  @if(account[0].role == "admin"){
+                    <button class="button-checking deny" >Deny</button>
+                    <button class="button-checking certain" >Accept</button>
+                  }
                   </div>
               </div>
             <!-- </a> -->

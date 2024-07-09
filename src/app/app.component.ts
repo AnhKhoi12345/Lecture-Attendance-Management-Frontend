@@ -6,11 +6,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
 // import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet, CoursesComponent, HeaderComponent, SidebarComponent,HttpClientModule,RouterLink],
+  imports: [CommonModule,RouterOutlet, CoursesComponent, HeaderComponent, SidebarComponent,HttpClientModule,RouterLink, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

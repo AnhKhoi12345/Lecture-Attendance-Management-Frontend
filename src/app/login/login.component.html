@@ -1,15 +1,24 @@
-<h1>Login</h1>
-@if(errorMessage){
-    <div>{{errorMessage}}</div>
-}
-<form [formGroup] = "form" (ngSubmit) = "onSubmit()">
-    <div>
-        <input type="text" placeholder="Email" formControlName="email">
+<div class="login-container">
+    <div class="image-container">
+        <img src="../../../assets/images/VGU-Logo.png" alt="vgu logo" />
     </div>
-    <div>
-        <input type="password" placeholder="Password" formControlName="password">
-    </div>
-    <div>
-        <button type="submit">Login</button>
+    <div class="login-flexbox">
+        <div class="login-title">
+            <h1>Login to VGU attendance management system</h1>
+            <h4>Please enter your school email and password to login</h4>
+        </div>
+
+<form class="login-form" [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    @if(errorMessage){
+        <div class="error-message">{{errorMessage}}</div>
+    }
+    <h3>Email:</h3>
+    <input class="email-input" type="text" placeholder="Email" formControlName="email">
+    <h3>Password:</h3>
+    <input class="password-input" type="password" placeholder="Password" formControlName="password">
+    <div class="submit-button-container">
+        <button class="login-button" type="submit">Login</button>
     </div>
 </form>
+    </div>
+</div>
