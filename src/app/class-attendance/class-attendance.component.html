@@ -88,6 +88,15 @@
           </div>
           </div>
         <hr />
+        <form class="attendance-search">
+          <input
+            class="search-bar"
+            type="text"
+            placeholder="Filter by student name or ID number"
+            (input)="filterAttendanceResults(filter.value)"
+            #filter
+          />
+        </form>
         <div class="attendance-container">
           <div class="column-name">
             <p class="class-number">STUDENT NUMBER</p>
@@ -95,7 +104,8 @@
             <p class="class-time">STUDENT NAME</p>
             <p class="class-action">ACTION</p>
           </div>
-          <div class="attendance-data" *ngFor="let attendance of allAttendanceList; index as i">
+          <p class="no-student" *ngIf="listEmpty === true">No student matched this name or ID number</p>
+          <div class="attendance-data" *ngFor="let attendance of filteredAttendanceList; index as i">
             <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
               <div class="row-data">
                 <div class="column data-number">{{ i + 1 }}</div>

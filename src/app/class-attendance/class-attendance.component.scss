@@ -26,6 +26,18 @@
         }
     }
   }
+  .attendance-search {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .search-bar {
+      height: 40px;
+      width: 500px;
+      padding-left: 15px;
+      border-radius: 10px;
+    }
+  }
     .attendance-container {
       // border: 1px solid red;
       padding-right: 50px;
@@ -49,6 +61,11 @@
             flex: 3;
             text-align: center;
           }
+      }
+      .no-student{
+        color: red;
+        margin-top: 30px;
+
       }
       .attendance-data {
         .row-data {

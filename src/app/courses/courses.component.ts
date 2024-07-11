@@ -27,6 +27,7 @@ export class CoursesComponent {
   filteredLecturerModules: CoursesList[] = [];
   allModuleList: CoursesList[] = [];
   filteredAllModules: CoursesList[] = [];
+  listEmpty:boolean = false;
   constructor() {
     // this.emptyList = [
     //   {
@@ -50,6 +51,7 @@ export class CoursesComponent {
   filterResults(text?: string) {
     if (!text) {
       this.filteredCourses = this.coursesList;
+      this.listEmpty = false;
     } else if (text) {
       this.filteredCourses = this.coursesList.filter(
         (coursesList) =>
@@ -57,6 +59,9 @@ export class CoursesComponent {
           coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
           coursesList?.semester.toLowerCase().includes(text.toLowerCase())
       );
+      if(this.filteredCourses.length === 0){
+        this.listEmpty = true;
+      }else this.listEmpty = false;
     }
 
     // if (this.finished && this.ongoing) {
@@ -83,12 +88,16 @@ export class CoursesComponent {
   filterLecturerResults(text?: string) {
     if (!text) {
       this.filteredLecturerModules = this.lecturerModuleList;
+      this.listEmpty = false;
     } else if (text) {
       this.filteredLecturerModules = this.lecturerModuleList.filter(
         (list) =>
           list?.name.toLowerCase().includes(text.toLowerCase()) ||
         list?.semester.toLowerCase().includes(text.toLowerCase())
       );
+      if(this.filteredLecturerModules.length === 0){
+        this.listEmpty = true;
+      }else this.listEmpty = false;
     }
   }
 }

@@ -27,6 +27,8 @@ export class ClassAttendanceComponent {
   account: UserAccountInterface[] = []
   allAttendanceList: AttendanceList[] = [];
   noti_text!: string;
+  filteredAttendanceList: AttendanceList[] = [];
+  listEmpty: boolean = false;
   // title = 'modal-app';
   // showModal = false;
   constructor() {
@@ -38,11 +40,12 @@ export class ClassAttendanceComponent {
    this.coursesService.getAccount().subscribe(account => this.account = account);
   this.coursesService.getAttendanceListForStudent(this.courseId, this.classDate,this.classStart).subscribe(attendance => this.attendanceList = attendance);
   this.coursesService.getAttendanceList(this.courseId, this.classDate,this.classStart).subscribe(attendance => this.allAttendanceList = attendance);
+  this.coursesService.getAttendanceList(this.courseId, this.classDate,this.classStart).subscribe(attendance => this.filteredAttendanceList = attendance);
 
 }
 
  requestChecking(sender:string,sender_id:string,receiver:string,receiver_id:string,module_name:string,semester:string,class_date:Date,start_time:string,end_time:string):void {
-    this.noti_text = `Greeting Prof. ${receiver}, student ${sender} (${sender_id}) want to request checking attendance for module ${module_name}, ${semester} semesrter, class on date ${class_date}, time ${start_time} - ${end_time}. Thank you very much`
+    this.noti_text = `Greeting Prof. ${receiver}, student ${sender} (${sender_id}) want to request checking attendance for module ${module_name}, ${semester} semesrter, class on date ${class_date.toString().split("T")[0]}, time ${start_time} - ${end_time}. Thank you very much`
     this.coursesService.sendNotification(sender_id,receiver_id,this.noti_text || "").subscribe(()=>{
       alert("Your request has been sent! Press OK to return");
       this.router.navigateByUrl(`/courses/${this.courseId}`);
@@ -50,7 +53,19 @@ export class ClassAttendanceComponent {
     
   
  }
-//  toggleModal = () => {
-//   this.showModal = !this.showModal;
-// }
+filterAttendanceResults(text?: string) {
+  if (!text) {
+    this.filteredAttendanceList = this.allAttendanceList;
+    this.listEmpty = false;
+  } else if (text) {
+    this.filteredAttendanceList = this.allAttendanceList.filter(
+      (list) =>
+        list?.student_name.toLowerCase().includes(text.toLowerCase()) ||
+      list?.student_id.toLowerCase().includes(text.toLowerCase())
+    );
+    if(this.filteredAttendanceList.length === 0){
+      this.listEmpty = true;
+    }else this.listEmpty = false;
+  }
+}
 }

@@ -33,19 +33,30 @@ export class RegisterComponent {
     
   const rawForm = this.form.getRawValue();
   const username = rawForm.username;
-  this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
-  next:() => {
-    this.authService.user$.subscribe(user => {
-    this.courseService.createAccount(user?.uid || "",rawForm.schoolId, rawForm.username, rawForm.email, rawForm.password,rawForm.role).subscribe(()=>{
+  // this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
+  // next:() => {
+  //   this.authService.user$.subscribe(user => {
+  //   this.courseService.createAccount(user?.uid || "",rawForm.schoolId, rawForm.username, rawForm.email, rawForm.password,rawForm.role).subscribe(()=>{
 
-      this.router.navigateByUrl('/').then(() => {window.location.reload();});
-    })
-    // return this.http.post<UserAccountInterface>(
-    //   'api/accounts',
-    //   {username, rawForm.username},
+  //     this.router.navigateByUrl('/').then(() => {window.location.reload();});
+  //   })
+  //   // return this.http.post<UserAccountInterface>(
+  //   //   'api/accounts',
+  //   //   {username, rawForm.username},
   
-    // )
-    })
+  //   // )
+  //   })
+    this.courseService.createFirebaseAccount(rawForm.username,rawForm.email,  rawForm.password).subscribe({
+      next:() => {
+        this.courseService.createAccount("I7ZIJPhTtZci8aYaeZqxLCLUKqf3",rawForm.schoolId, rawForm.username, rawForm.email, rawForm.password,rawForm.role).subscribe(()=>{
+          alert("Account created successfully");
+        })
+        // return this.http.post<UserAccountInterface>(
+        //   'api/accounts',
+        //   {username, rawForm.username},
+      
+        // )
+        
   },
   
 error: (err) =>{

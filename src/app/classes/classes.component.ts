@@ -18,11 +18,28 @@ export class ClassesComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   coursesService: CoursesService = inject(CoursesService);
   id!: string;
+  filteredClassesList: Classes[] = [];
+  listEmpty: boolean = false;
   constructor() {
      this.id = this.route.snapshot.paramMap.get('courseId')!;
   }
   ngOnInit(): void {
     this.coursesService.getClasses(this.id).subscribe(classes => this.class = classes);
+    this.coursesService.getClasses(this.id).subscribe(classes => this.filteredClassesList = classes);
     // console.log("this class is: " + this.class);
+  }
+  filterClassesResult(text?: string) {
+    if (!text) {
+      this.filteredClassesList = this.class;
+      this.listEmpty = false;
+    } else if (text) {
+      this.filteredClassesList = this.class.filter(
+        (list) =>
+          list?.class_date.toString().toLowerCase().includes(text.toLowerCase())
+      );
+      if(this.filteredClassesList.length === 0){
+        this.listEmpty = true;
+      }else this.listEmpty = false;
+    }
   }
 }

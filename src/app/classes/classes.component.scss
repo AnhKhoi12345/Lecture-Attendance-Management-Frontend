@@ -10,6 +10,18 @@
       margin-top: 10px;
     }
   }
+  .class-search {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .search-bar {
+      height: 40px;
+      width: 500px;
+      padding-left: 15px;
+      border-radius: 10px;
+    }
+  }
   .class-container {
     // border: 1px solid red;
     width: 60%;
@@ -26,6 +38,11 @@
       .class-time {
         flex: 3;
       }
+    }
+    .no-class{
+      color: red;
+      margin-top: 30px;
+
     }
     .class-data {
       .row-data {

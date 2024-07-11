@@ -54,6 +54,7 @@
       <p class="course-lecturer">LECTURER</p>
       <!-- <p class="course-status">STATUS</p> -->
     </div>
+    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
     <div class="list-data" *ngFor="let courses of filteredCourses; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
@@ -97,6 +98,7 @@
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
     </div>
+    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
     <div class="list-data" *ngFor="let courses of filteredLecturerModules; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
@@ -128,6 +130,7 @@
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
     </div>
+    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
     <div class="list-data" *ngFor="let courses of filteredAllModules; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">

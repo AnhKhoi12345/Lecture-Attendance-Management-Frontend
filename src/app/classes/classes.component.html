@@ -13,13 +13,23 @@
     <h2 class="course-lecturer">Lecturer: {{ class[0].lecturer }}</h2>
   </div>
   <hr />
+  <form class="class-search">
+    <input
+      class="search-bar"
+      type="text"
+      placeholder="Filter by class date"
+      (input)="filterClassesResult(filter.value)"
+      #filter
+    />
+  </form>
   <div class="class-container">
     <div class="column-name">
       <p class="class-number">CLASS NUMBER</p>
       <p class="class-date">DATE</p>
       <p class="class-time">TIME</p>
     </div>
-    <div class="class-data" *ngFor="let class of class; index as i">
+    <p class="no-class" *ngIf="listEmpty === true">No class matched this date</p>
+    <div class="class-data" *ngFor="let class of filteredClassesList; index as i">
       <a [routerLink]="['/courses', class.module_id, class.class_date, class.start_time]">
         <div class="row-data">
           <div class="column data-number">{{ i + 1 }}</div>
