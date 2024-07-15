@@ -10,6 +10,7 @@ import { UserAccountInterface } from './interfaces/userAccount';
 import { NotificationsInterface } from './interfaces/notificationList';
 import { UserInterface } from './interfaces/user';
 import { UserFirebaseInterface } from './interfaces/userFirebaseAccount';
+import { ModuleInterface } from './interfaces/module';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -75,10 +76,17 @@ export class CoursesService {
       httpOptions,
     );
   }
-  createFirebaseAccount(username:string, email:string, password:string ): Observable<UserFirebaseInterface> {
+  createFirebaseAccount(uuid:string, username:string, email:string, password:string ): Observable<UserFirebaseInterface> {
     return this.http.post<UserFirebaseInterface>(
       `/api/firebase/account`,
-      {username, email, password},
+      {uuid, username, email, password},
+      httpOptions,
+    );
+  }
+  createModule( name: string, capacity:string, etcs:string, lecturer_id:string): Observable<ModuleInterface> {
+    return this.http.post<ModuleInterface>(
+      `/api/module`,
+      { name, capacity, etcs, lecturer_id},
       httpOptions,
     );
   }

@@ -5,6 +5,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ManageModuleComponent } from './manage-module/manage-module.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,12 @@ export const routes: Routes = [
     path: 'courses/:courseId/:classDate/:classStart',
     component: ClassAttendanceComponent,
     title: 'Class Attendance',
+    pathMatch: 'full',
+  },
+  {
+    path: 'managemodule',
+    component: ManageModuleComponent,
+    title: 'Manage Module',
     pathMatch: 'full',
   },
 ];

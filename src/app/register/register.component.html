@@ -7,23 +7,23 @@
 <form class="register-form" [formGroup] = "form" (ngSubmit) = "onSubmit()">
     <h4>ID:</h4>
     <div>
-        <input class="register-input" type="text" placeholder="School ID" formControlName="schoolId">
+        <input class="register-input" type="text" placeholder="School ID" formControlName="schoolId" required>
     </div>
     <h4>Username:</h4>
     <div>
-        <input class="register-input"  type="text" placeholder="Username" formControlName="username">
+        <input class="register-input"  type="text" placeholder="Username" formControlName="username" required>
     </div>
     <h4>Email:</h4>
     <div>
-        <input class="register-input"  type="text" placeholder="Email" formControlName="email">
+        <input class="register-input"  type="text" placeholder="Email" formControlName="email" required>
     </div>
     <h4>Password:</h4>
     <div>
-        <input class="register-input"  type="password" placeholder="Password" formControlName="password">
+        <input class="register-input"  type="password" placeholder="Password" formControlName="password" required>
     </div>
     <h4>Role:</h4>
     <div>
-        <input class="register-input"  type="text" placeholder="Role" formControlName="role">
+        <input class="register-input"  type="text" placeholder="Role" formControlName="role" required>
     </div>
     <div class="submit-button-container">
         <button class="register-button" type="submit">Sign Up</button>

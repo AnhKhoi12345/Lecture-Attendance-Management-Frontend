@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import { UserAccountInterface } from '../interfaces/userAccount';
 import { CoursesService } from '../courses.service';
 import { getAuth } from '@angular/fire/auth';
+import { randomUUID } from 'crypto';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -33,6 +34,8 @@ export class RegisterComponent {
     
   const rawForm = this.form.getRawValue();
   const username = rawForm.username;
+  let uuid = self.crypto.randomUUID();
+  
   // this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
   // next:() => {
   //   this.authService.user$.subscribe(user => {
@@ -46,16 +49,13 @@ export class RegisterComponent {
   
   //   // )
   //   })
-    this.courseService.createFirebaseAccount(rawForm.username,rawForm.email,  rawForm.password).subscribe({
+
+
+    this.courseService.createFirebaseAccount(uuid,rawForm.username,rawForm.email,  rawForm.password).subscribe({
       next:() => {
-        this.courseService.createAccount("I7ZIJPhTtZci8aYaeZqxLCLUKqf3",rawForm.schoolId, rawForm.username, rawForm.email, rawForm.password,rawForm.role).subscribe(()=>{
-          alert("Account created successfully");
+        this.courseService.createAccount(uuid,rawForm.schoolId, rawForm.username, rawForm.email, rawForm.password,rawForm.role).subscribe(()=>{
+          alert("Account created successfully")
         })
-        // return this.http.post<UserAccountInterface>(
-        //   'api/accounts',
-        //   {username, rawForm.username},
-      
-        // )
         
   },
   
