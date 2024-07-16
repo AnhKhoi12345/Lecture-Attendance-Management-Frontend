@@ -1,21 +1,60 @@
 <div class="sidebar-container">
   <h1 class="sidebar-title">Lecture Attendance Management</h1>
   <nav class="sidebar-nav">
+    <div class="nav-header sidebar-course" >
+      Browsing Data
+    </div>
     <div class="nav-item sidebar-course" [routerLink]="['/']">
       <h2><i class="fa-solid fa-house"></i>Courses</h2>
+    </div>
+    <div class="nav-item sidebar-course" [routerLink]="['/']">
+      <h2><i class="fa-solid fa-database"></i>Search Database</h2>
+    </div>
+    @if(account[0].role == "admin"){
+      <div class="nav-header sidebar-course" >
+        Statistics
+      </div>
+      <!-- <div class="nav-item sidebar-course" [routerLink]="['/register']">
+        <h2><i class="fa-solid fa-user-plus"></i>Analytics</h2>
+      </div> -->
+      <div class="nav-item sidebar-course" [routerLink]="['/']">
+        <h2><i class="fa-solid fa-chart-pie"></i>Charts</h2>
+      </div>
+      <div class="nav-header sidebar-course" >
+        Database Management 
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/register']">
+        <h2><i class="fa-solid fa-user-plus"></i>Manage Account</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/']">
+        <h2><i class="fa-solid fa-users"></i>Manage Student</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/']">
+        <h2><i class="fa-solid fa-chalkboard-user"></i>Manage Lecturer</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
+        <h2><i class="fa-solid fa-book"></i>Manage Module</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
+        <h2><i class="fa-solid fa-book"></i>Manage Semester</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
+        <h2><i class="fa-solid fa-book"></i>Manage Program Module</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
+        <h2><i class="fa-solid fa-book"></i>Manage Program</h2>
+      </div>
+      <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
+        <h2><i class="fa-solid fa-book"></i>Manage Program Registering</h2>
+      </div>
+    }
+    <div class="nav-header sidebar-course" >
+      Your Account
     </div>
     <div class="nav-item sidebar-course" [routerLink]="['/notifications']">
       <h2><i class="fa-solid fa-bell"></i>Notifications</h2>
     </div>
-    @if(account[0].role == "admin"){
-    <div class="nav-item sidebar-course" [routerLink]="['/register']">
-      <h2><i class="fa-solid fa-user-plus"></i>Register User</h2>
-    </div>
-    <div class="nav-item sidebar-course" [routerLink]="['/managemodule']">
-      <h2><i class="fa-solid fa-book"></i>Manage Module</h2>
-    </div>
-  }
-    <div class="nav-item sidebar-course" (click) = "logout()">
+    <div class="nav-item sidebar-logout" (click) = "logout()">
       <h2><i class="fa-solid fa-right-from-bracket"></i>Log Out</h2>
     </div>
     <!-- <div class="sidebar-course"></div>

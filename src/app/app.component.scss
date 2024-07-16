@@ -4,8 +4,12 @@
   float: right;
   width: 80%;
   // background-color : red;
-  height: 100vh;
+  height: 200vh;
   background: url("../assets/images/output-onlinepngtools\ \(1\).png") no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
   background-color: white;
+  background-attachment: fixed;
+  background-size: cover;
+  // background-repeat: no-repeat;
+  background-position: center;
 }

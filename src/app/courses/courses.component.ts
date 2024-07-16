@@ -100,4 +100,19 @@ export class CoursesComponent {
       }else this.listEmpty = false;
     }
   }
+  filterAllResults(text?: string) {
+    if (!text) {
+      this.filteredAllModules = this.allModuleList;
+      this.listEmpty = false;
+    } else if (text) {
+      this.filteredAllModules = this.allModuleList.filter(
+        (list) =>
+          list?.name.toLowerCase().includes(text.toLowerCase()) ||
+        list?.semester.toLowerCase().includes(text.toLowerCase())
+      );
+      if(this.filteredAllModules.length === 0){
+        this.listEmpty = true;
+      }else this.listEmpty = false;
+    }
+  }
 }

@@ -40,11 +40,20 @@
   }
     .attendance-container {
       // border: 1px solid red;
-      padding-right: 50px;
+      // padding-right: 50px;
       width: 70%;
       margin-top: 50px;
-      height: 65vh;
-      overflow: scroll;
+      height: 60vh;
+      // overflow: scroll;
+
+      box-shadow: 10px 20px 3px rgb(255, 209, 125);
+      border-radius: 20px;
+        border: 2px solid orange;
+        padding: 50px;
+        // width: 70%;
+        margin-top: 50px;
+        // height: 500px;
+        overflow: scroll;
       .column-name {
         display: flex;
         justify-content: space-between;

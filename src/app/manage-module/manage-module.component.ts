@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { CsvService } from '../csv.service';
 import { CoursesList } from '../interfaces/coursesList';
 import { FormsModule } from '@angular/forms';
@@ -15,29 +15,33 @@ import { CoursesService } from '../courses.service';
   styleUrl: './manage-module.component.scss'
 })
 export class ManageModuleComponent {
+  @ViewChild('fileUploadSimple') input!:ElementRef<HTMLInputElement>;
+  listEmpty: boolean = true;
   authService = inject(AuthService);
   route: ActivatedRoute = inject(ActivatedRoute);
   coursesService: CoursesService = inject(CoursesService);
   public importedData: Array<ModuleInterface> = [];
-  public arrayWithSimpleData: Array<CoursesList> = [
-    { module_id: "1",name: 'Math', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-    { module_id: "2",name: 'English', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-    { module_id: "3",name: 'Code', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-  ];
+  // public arrayWithSimpleData: Array<CoursesList> = [
+  //   { module_id: "1",name: 'Math', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
+  //   { module_id: "2",name: 'English', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
+  //   { module_id: "3",name: 'Code', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
+  // ];
   _csvService = inject(CsvService)
   constructor() {}
-  public saveDataInCSV(name: string, data: Array<any>): void {
-    let csvContent = this._csvService.saveDataInCSV(data);
+//   public saveDataInCSV(name: string, data: Array<any>): void {
+//     let csvContent = this._csvService.saveDataInCSV(data);
     
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = name + '.csv';
-    hiddenElement.click();
-}
+//     var hiddenElement = document.createElement('a');
+//     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+//     hiddenElement.target = '_blank';
+//     hiddenElement.download = name + '.csv';
+//     hiddenElement.click();
+// }
 public async importDataFromCSV(event: any) {
   let fileContent = await this.getTextFromFile(event);
   this.importedData = this._csvService.importDataFromCSV(fileContent);
+  console.log(this.importedData);
+  this.listEmpty = false
 }
 private async getTextFromFile(event: any) {
   const file: File = event.target.files[0];
@@ -56,5 +60,11 @@ private async getTextFromFile(event: any) {
   }
    alert("Upload completed!")
 } else alert("Empty CSV file")
+}
+
+clearCSV():void{
+  this.input.nativeElement.value = "";
+  this.importedData = [];
+  this.listEmpty = true;
 }
 }
