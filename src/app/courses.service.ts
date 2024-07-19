@@ -11,6 +11,7 @@ import { NotificationsInterface } from './interfaces/notificationList';
 import { UserInterface } from './interfaces/user';
 import { UserFirebaseInterface } from './interfaces/userFirebaseAccount';
 import { ModuleInterface } from './interfaces/module';
+import { LecturerInterface } from './interfaces/lecturer';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -161,5 +162,24 @@ export class CoursesService {
       {sender_id, receiver_id, noti_text},
       httpOptions,
     );
+  }
+  getLecturerByName(lecturer_name:string): Observable<LecturerInterface[]> {
+  //   return new Observable<LecturerInterface[]>(observer => {
+  //     this.authService.user$.subscribe(user => {
+  //       user && user.getIdToken().then(token => {
+  //         if (user && token){
+  //            this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+  //            .subscribe(attendance => {
+  //             observer.next(attendance);
+  //            });
+
+  //         }else{
+  //           observer.next([]);
+  //         }
+  //       })
+  //     })
+  //   })
+  // }
+  return this.http.get<LecturerInterface[]>(`/api/lecturer/${lecturer_name}`)
   }
 }

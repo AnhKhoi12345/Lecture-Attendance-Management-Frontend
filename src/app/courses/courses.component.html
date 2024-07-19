@@ -50,6 +50,8 @@
       <p class="course-id">MODULE NO.</p>
       <!-- <p class="course-code">MODULE CODE</p> -->
       <p class="course-name">MODULE NAME</p>
+      <p class="course-program">PROGRAM</p>
+      <p class="course-intake">INTAKE</p>
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
       <!-- <p class="course-status">STATUS</p> -->
@@ -63,6 +65,8 @@
             {{ courses.name.split("(")[1].split(")")[0] }}
           </div> -->
           <div class="column data-name">{{ courses.name }}</div>
+          <div class="column data-program">{{ courses.program_id }}</div>
+          <div class="column data-intake">{{ courses.intake }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
           <!-- <div
@@ -95,6 +99,8 @@
     <div class="column-name">
       <p class="course-id">MODULE NO.</p>
       <p class="course-name">MODULE NAME</p>
+      <p class="course-program">PROGRAM</p>
+      <p class="course-intake">INTAKE</p>
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
     </div>
@@ -104,6 +110,8 @@
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
           <div class="column data-name">{{ courses.name }}</div>
+          <div class="column data-program">{{ courses.program_id }}</div>
+          <div class="column data-intake">{{ courses.intake }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
         </div>
@@ -127,6 +135,8 @@
     <div class="column-name">
       <p class="course-id">MODULE NO.</p>
       <p class="course-name">MODULE NAME</p>
+      <p class="course-program">PROGRAM</p>
+      <p class="course-intake">INTAKE</p>
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
     </div>
@@ -136,6 +146,8 @@
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
           <div class="column data-name">{{ courses.name }}</div>
+          <div class="column data-program">{{ courses.program_id }}</div>
+          <div class="column data-intake">{{ courses.intake }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
         </div>

@@ -25,8 +25,8 @@
       <div class="column-name">
         <h4 class="class-number">MODULE NAME</h4>
         <h4 class="class-date">CAPACITY</h4>
-        <h4 class="class-time">ETCS NAME</h4>
-        <h4 class="class-action">LECTURER IDS</h4>
+        <h4 class="class-time">ETCS</h4>
+        <h4 class="class-action">LECTURER</h4>
       </div>
       <p class="no-student" *ngIf="listEmpty === true">No CSV file</p>
       <div class="attendance-data" *ngFor="let item of importedData">
@@ -38,13 +38,31 @@
               {{ item.etcs}}
             </div>
             <div class="column action">
-              {{ item.lecturer_id}}
+              {{ item.lecturer_name}}
             </div>
           </div>
         <!-- </a> -->
         <hr />
       </div>
+      <!-- <div class="attendance-data">
+          <div class="row-data">
+            <div class="column data-number">{{ lecturer.name }}</div>
+            <div class="column data-date">{{ lecturer.staff_id }}</div>
+          </div>
+        <hr />
+      </div> -->
     </div>
+    <!-- <div class="attendance-container">
+      <div class="column-name">
+        <h4 class="class-number">Lecturer Name</h4>
+      </div>
+      <div class="attendance-data"  *ngFor="let item of lecturer">
+          <div class="row-data">
+            <div class="column data-number">{{ item.name }}</div>
+          </div>
+        <hr />
+      </div>
+    </div> -->
       <br /><br />
       <div class="csv-action">
         <button class="upload-database-button" (click)="createModuleFromCSV()">Upload to the Database</button>

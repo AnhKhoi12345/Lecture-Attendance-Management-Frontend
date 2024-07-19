@@ -36,7 +36,7 @@
     border-radius: 20px;
       border: 2px solid orange;
       padding: 50px;
-      width: 70%;
+      width: 100%;
       // margin-top: 50px;
       height: 60vh;
       overflow: scroll;
@@ -50,7 +50,13 @@
         flex: 2;
       }
       .course-name {
-        flex: 6;
+        flex: 5;
+      }
+      .course-program{
+        flex: 1;
+      }
+      .course-intake{
+        flex: 3;
       }
       .course-semester {
         flex: 2;
@@ -87,7 +93,13 @@
           flex: 2;
         }
         .data-name {
-          flex: 6;
+          flex: 5;
+        }
+        .data-program {
+          flex: 1;
+        }
+        .data-intake {
+          flex: 3;
         }
         .data-semester {
           flex: 2;

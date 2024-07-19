@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { ModuleInterface } from '../interfaces/module';
 import { CoursesService } from '../courses.service';
+import { LecturerInterface } from '../interfaces/lecturer';
+import { ModuleLecturerNameInterface } from '../interfaces/moduleLecturerName';
 @Component({
   selector: 'app-manage-module',
   standalone: true,
@@ -20,7 +22,8 @@ export class ManageModuleComponent {
   authService = inject(AuthService);
   route: ActivatedRoute = inject(ActivatedRoute);
   coursesService: CoursesService = inject(CoursesService);
-  public importedData: Array<ModuleInterface> = [];
+  lecturer:LecturerInterface[] = [];
+  public importedData: Array<ModuleLecturerNameInterface> = [];
   // public arrayWithSimpleData: Array<CoursesList> = [
   //   { module_id: "1",name: 'Math', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
   //   { module_id: "2",name: 'English', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
@@ -49,22 +52,40 @@ private async getTextFromFile(event: any) {
 
   return fileContent;
 }
-  createModuleFromCSV():void{
-    if( this.importedData.length > 0  ) {
-    for (let index = 0; index < this.importedData.length-1; index++){
-      const element = this.importedData[index];
-      console.log(element);
-      this.coursesService.createModule( element.name, element.capacity, element.etcs, element.lecturer_id).subscribe(()=>{
+//   createModuleFromCSV():void{
+//     if( this.importedData.length > 0  ) {
+//     for (let index = 0; index < this.importedData.length-1; index++){
+//       const element = this.importedData[index];
+//       console.log(element);
+//       this.coursesService.createModule( element.name, element.capacity, element.etcs, element.lecturer_name).subscribe(()=>{
         
-      })
-  }
-   alert("Upload completed!")
+//       })
+//   }
+//    alert("Upload completed!")
+// } else alert("Empty CSV file")
+// }
+createModuleFromCSV():void{
+  if( this.importedData.length > 0  ) {
+  for (let index = 0; index < this.importedData.length-1; index++){
+    const element = this.importedData[index];
+    this.coursesService.getLecturerByName(element.lecturer_name ).subscribe( (lecturer)=>{
+      this.lecturer =lecturer
+      // console.log(this.lecturer)
+      this.coursesService.createModule( element.name, element.capacity, element.etcs, this.lecturer[0].staff_id).subscribe(()=>{
+      
+    })
+    }
+)}
+ alert("Upload completed!")
 } else alert("Empty CSV file")
 }
-
 clearCSV():void{
   this.input.nativeElement.value = "";
   this.importedData = [];
   this.listEmpty = true;
 }
+// ngOnInit(): void {
+//   this.coursesService.getLecturerByName("Tran Hong Ngoc").subscribe( lecturer=> this.lecturer =lecturer)
+
+// }
 }
