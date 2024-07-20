@@ -11,25 +11,60 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    // border: 2px solid orange;
+    .filter-item{
+      margin-right: 50px;
+    }
+    .search-module{
     .search-bar {
       height: 40px;
-      width: 500px;
+      width: 400px;
       padding-left: 15px;
       border-radius: 10px;
     }
-    .checkbox {
-      scale: 2;
-      margin-right: 10px;
-      margin-left: 30px;
+  }
+    .search-lecturer{
+      .search-bar {
+        height: 40px;
+        width: 400px;
+        padding-left: 15px;
+        border-radius: 10px;
+      }
     }
-    .filter-button {
+    // .checkbox {
+    //   scale: 2;
+    //   margin-right: 10px;
+    //   margin-left: 30px;
+    // }
+    // .filter-button {
+    //   height: 40px;
+    //   width: 80px;
+    //   border-radius: 10px;
+    //   margin-left: 20px;
+    //   cursor: pointer;
+    // }
+    .search-program{
+    .select-program{
       height: 40px;
-      width: 80px;
-      border-radius: 10px;
-      margin-left: 20px;
-      cursor: pointer;
+      width: 70px;
+      border-radius: 3px;
     }
   }
+  .search-intake{
+    .select-intake{
+      height: 40px;
+      width: 70px;
+      border-radius: 3px;
+    }
+  }
+  .search-semester{
+    .select-semester{
+      height: 40px;
+      width: 100px;
+      border-radius: 3px;
+    }
+  }
+}
   .list-container {
     margin-top: 30px;
     box-shadow: 10px 20px 3px rgb(255, 209, 125);
@@ -50,13 +85,13 @@
         flex: 2;
       }
       .course-name {
-        flex: 5;
+        flex: 4;
       }
       .course-program{
         flex: 1;
       }
       .course-intake{
-        flex: 3;
+        flex: 1;
       }
       .course-semester {
         flex: 2;
@@ -93,13 +128,13 @@
           flex: 2;
         }
         .data-name {
-          flex: 5;
+          flex: 4;
         }
         .data-program {
           flex: 1;
         }
         .data-intake {
-          flex: 3;
+          flex: 1;
         }
         .data-semester {
           flex: 2;

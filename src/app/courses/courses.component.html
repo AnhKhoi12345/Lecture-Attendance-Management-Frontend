@@ -1,161 +1,128 @@
 @if(authService.currentUserSig()) {
 <div class="courses-content">
   <a class="link" [routerLink]="['/']">Courses</a>
-  @if(account[0].role == "student") {
   <form class="courses-search">
+    <div class="filter-item search-module">
+    <div>Module:</div>
     <input
       class="search-bar"
       type="text"
-      placeholder="Filter by course name, semester or lecturer"
-      (input)="filterResults(filter.value)"
-      #filter
+      placeholder="Filter by module name"
+      (input)="filterByModule(filterModule.value)"
+      #filterModule
     />
-    <!-- <div>
-      <input
-        name="all"
-        class="checkbox"
-        type="checkbox"
-        [(ngModel)]="all"
-        (change)="finished = false; ongoing = false"
-      />
-      <span>Default</span>
-    </div> -->
-    <!-- <div>
-      <input
-        name="finished"
-        class="checkbox"
-        type="checkbox"
-        [(ngModel)]="finished"
-        (change)="filterResults(filter.value)"
-      />
-      <span>Finished</span>
-    </div>
-    <div>
-      <input
-        name="ongoing"
-        class="checkbox"
-        type="checkbox"
-        [(ngModel)]="ongoing"
-        (change)="filterResults(filter.value)"
-      />
-      <span>Ongoing</span>
-    </div> -->
-    <!-- <button class="filter-button" type="button">
-      <i class="fa-solid fa-filter"></i>
-      Filter
-    </button> -->
-  </form>
+  </div>
+  <div class="filter-item search-lecturer">
+    <div>Lecturer:</div>
+    <input
+    class="search-bar"
+    type="text"
+    placeholder="Filter by lecturer name"
+    (input)="filterByLecturer(filterLecturer.value)"
+    #filterLecturer
+  />
+  </div>
+  <div class="filter-item search-program">
+  <div>Program:</div>
+  <select class="select-program" #filterProgram name="program" id="program" [(ngModel)]="module.program" (change)="filterByProgram(filterProgram.value)">
+    <option value="all">ALL</option>
+    <option value="cse">CSE</option>
+    <option value="ba">BA</option>
+    <option value="ece">ECE</option>
+    <option value="bfa">BFA</option>
+    <option value="bce">BCE</option>
+    <option value="arc">ARC</option>
+    <option value="epe">EPE</option>
+    <option value="sme">SME</option>
+    <option value="COM">COM</option>
+    <option value="mst">MST</option>
+    <option value="sud">SUD</option>
+    <option value="gpe">GPE</option>
+    <option value="bis">BIS</option>
+    <option value="mba">MBA</option>
+    <option value="wte">WTE</option>
+    <option value="its">ITS</option>
+    <option value="msi">MSI</option>
+    <option value="gfe">GFE</option>
+    <option value="mee">MEE</option>
+  </select>
+  </div>
+  <div class="filter-item search-intake">
+  <div>Intake:</div>
+  <select class="select-intake" #filterIntake name="intake" id="intake" [(ngModel)]="module.intake" (change)="filterByIntake(filterIntake.value)">
+    <option value="all">ALL</option>
+    <option value="2019">2019</option>
+    <option value="2020">2020</option>
+    <option value="2021">2021</option>
+    <option value="2022">2022</option>
+    <option value="2023">2023</option>
+    <option value="2024">2024</option>
+  </select>
+  </div>
+  <div class="filter-item search-semester">
+  <div>Semester:</div>
+  <select class="select-semester" #filterSemester name="semester" id="semester" [(ngModel)]="module.semester" (change)="filterBySemester(filterSemester.value)">
+    <option value="both">BOTH</option>
+    <option value="summer">SUMMER</option>
+    <option value="winter">WINTER</option>
+  </select>
+  </div>
+</form>
   <div class="list-container">
     <div class="column-name">
       <p class="course-id">MODULE NO.</p>
-      <!-- <p class="course-code">MODULE CODE</p> -->
       <p class="course-name">MODULE NAME</p>
       <p class="course-program">PROGRAM</p>
       <p class="course-intake">INTAKE</p>
       <p class="course-semester">SEMESTER</p>
       <p class="course-lecturer">LECTURER</p>
-      <!-- <p class="course-status">STATUS</p> -->
     </div>
-    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
+    <p class="no-module" *ngIf="listEmpty === true">No modules matched this filters</p>
+    @if(account[0].role == "student") {
     <div class="list-data" *ngFor="let courses of filteredCourses; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
-          <!-- <div class="column data-code">
-            {{ courses.name.split("(")[1].split(")")[0] }}
-          </div> -->
           <div class="column data-name">{{ courses.name }}</div>
           <div class="column data-program">{{ courses.program_id }}</div>
-          <div class="column data-intake">{{ courses.intake }}</div>
+          <div class="column data-intake">{{ courses.intake.toString().split("-")[0] }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
-          <!-- <div
-            [ngClass]="{
-              active: courses.active === false,
-              inactive: courses.active === true
-            }"
-            class="column data-status"
-          >
-            {{ courses.active == true ? "Ongoing" : "Finished" }}
-          </div> -->
         </div>
       </a>
       <hr />
     </div>
-  
-  </div>
-}
-@if(account[0].role == "lecturer") {
-  <form class="courses-search">
-    <input
-      class="search-bar"
-      type="text"
-      placeholder="Filter by course name, semester or lecturer"
-      (input)="filterLecturerResults(filter.value)"
-      #filter
-    />
-  </form>
-  <div class="list-container">
-    <div class="column-name">
-      <p class="course-id">MODULE NO.</p>
-      <p class="course-name">MODULE NAME</p>
-      <p class="course-program">PROGRAM</p>
-      <p class="course-intake">INTAKE</p>
-      <p class="course-semester">SEMESTER</p>
-      <p class="course-lecturer">LECTURER</p>
-    </div>
-    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
+  }
+  @if(account[0].role == "lecturer") {
     <div class="list-data" *ngFor="let courses of filteredLecturerModules; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
           <div class="column data-name">{{ courses.name }}</div>
           <div class="column data-program">{{ courses.program_id }}</div>
-          <div class="column data-intake">{{ courses.intake }}</div>
+          <div class="column data-intake">{{ courses.intake.toString().split("-")[0] }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
         </div>
       </a>
       <hr />
     </div>
-  
-  </div>
-}
-@if(account[0].role == "admin") {
-  <form class="courses-search">
-    <input
-      class="search-bar"
-      type="text"
-      placeholder="Filter by course name, semester or lecturer"
-      (input)="filterAllResults(filter.value)"
-      #filter
-    />
-  </form>
-  <div class="list-container">
-    <div class="column-name">
-      <p class="course-id">MODULE NO.</p>
-      <p class="course-name">MODULE NAME</p>
-      <p class="course-program">PROGRAM</p>
-      <p class="course-intake">INTAKE</p>
-      <p class="course-semester">SEMESTER</p>
-      <p class="course-lecturer">LECTURER</p>
-    </div>
-    <p class="no-module" *ngIf="listEmpty === true">No modules matched this name or lecturer</p>
+  }
+  @if(account[0].role == "admin") {
     <div class="list-data" *ngFor="let courses of filteredAllModules; index as i">
       <a [routerLink]="['/courses', courses.module_id]">
         <div class="row-data">
           <div class="column data-id">{{ i + 1 }}</div>
           <div class="column data-name">{{ courses.name }}</div>
           <div class="column data-program">{{ courses.program_id }}</div>
-          <div class="column data-intake">{{ courses.intake }}</div>
+          <div class="column data-intake">{{ courses.intake.toString().split("-")[0] }}</div>
           <div class="column data-semester">{{ courses.semester }}</div>
           <div class="column data-lecturer">{{ courses.lecturer }}</div>
         </div>
       </a>
       <hr />
     </div>
-  
+  }
   </div>
-}
 </div>
 }

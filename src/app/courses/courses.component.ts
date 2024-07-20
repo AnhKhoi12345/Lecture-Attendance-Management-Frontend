@@ -27,17 +27,19 @@ export class CoursesComponent {
   filteredLecturerModules: CoursesList[] = [];
   allModuleList: CoursesList[] = [];
   filteredAllModules: CoursesList[] = [];
+
   listEmpty:boolean = false;
+
+  filterModuleName:string ="";
+  filterLecturerName: string ="";
+  filterProgramId: string ="";
+  filterIntake: string ="";
+  filterSemester: string ="";
+  public module = {} as any;
+  program:string = '';
+  intake :string = '';
+  semester :string = '';
   constructor() {
-    // this.emptyList = [
-    //   {
-    //     id: 0,
-    //     name: 'No course found',
-    //     semester: '',
-    //     lecturer: '',
-    //     active: false,
-    //   },
-    // ];
   }
   ngOnInit(): void {
     this.coursesService.getAccount().subscribe(account => this.account = account);
@@ -47,72 +49,73 @@ export class CoursesComponent {
     this.coursesService.getLecturerModule().subscribe(courses => this.filteredLecturerModules = courses);
     this.coursesService.getCourses().subscribe(courses => this.allModuleList = courses);
     this.coursesService.getCourses().subscribe(courses => this.filteredAllModules = courses);
-  }
-  filterResults(text?: string) {
-    if (!text) {
-      this.filteredCourses = this.coursesList;
-      this.listEmpty = false;
-    } else if (text) {
-      this.filteredCourses = this.coursesList.filter(
-        (coursesList) =>
-          coursesList?.name.toLowerCase().includes(text.toLowerCase()) ||
-          coursesList?.lecturer.toLowerCase().includes(text.toLowerCase()) ||
-          coursesList?.semester.toLowerCase().includes(text.toLowerCase())
-      );
-      if(this.filteredCourses.length === 0){
-        this.listEmpty = true;
-      }else this.listEmpty = false;
-    }
 
-    // if (this.finished && this.ongoing) {
-    //   this.filteredCourses = this.filteredCourses.filter(
-    //     (coursesList) =>
-    //       coursesList?.active === true || coursesList?.active === false
-    //   );
-    //   return;
-    // } else if (this.finished && !this.ongoing) {
-    //   this.filteredCourses = this.filteredCourses.filter(
-    //     (coursesList) => coursesList?.active === false
-    //   );
-    //   return;
-    // } else if (!this.finished && this.ongoing) {
-    //   this.filteredCourses = this.filteredCourses.filter(
-    //     (coursesList) => coursesList?.active === true
-    //   );
-    //   return;
-    // } else if (!this.finished && !this.ongoing) {
-    //   this.filteredCourses = this.emptyList;
-    //   return;
-    // } else return;
+    this.module.program = 'all';
+    this.module.intake = 'all';
+    this.module.semester = 'both';
+    // this.module.intake = new Date().getFullYear().toString();
   }
-  filterLecturerResults(text?: string) {
+
+  filterByModule(text: string) {
+    this.filterModuleName = text.toLowerCase();
+    this.filterModule(text)
+  }
+  filterByLecturer(text: string) {
+    this.filterLecturerName = text.toLowerCase();
+    this.filterModule(text)
+  }
+  filterByProgram(text: string) {
+    if(text === "all"){
+      this.filterProgramId= ""
+    }else this.filterProgramId= text
+    
+    this.filterModule(text)
+  }
+  filterByIntake(text: string) {
+    if(text === "all"){ 
+      this.filterIntake= ""
+    }else this.filterIntake= text
+    this.filterModule(text)
+  }
+  filterBySemester(text: string) {
+    if(text === "both"){ 
+      this.filterSemester= ""
+    }else this.filterSemester= text
+    this.filterModule(text)
+  }
+  filterModule(text: string){
     if (!text) {
-      this.filteredLecturerModules = this.lecturerModuleList;
       this.listEmpty = false;
-    } else if (text) {
-      this.filteredLecturerModules = this.lecturerModuleList.filter(
-        (list) =>
-          list?.name.toLowerCase().includes(text.toLowerCase()) ||
-        list?.semester.toLowerCase().includes(text.toLowerCase())
-      );
-      if(this.filteredLecturerModules.length === 0){
-        this.listEmpty = true;
-      }else this.listEmpty = false;
     }
-  }
-  filterAllResults(text?: string) {
-    if (!text) {
-      this.filteredAllModules = this.allModuleList;
-      this.listEmpty = false;
-    } else if (text) {
       this.filteredAllModules = this.allModuleList.filter(
         (list) =>
-          list?.name.toLowerCase().includes(text.toLowerCase()) ||
-        list?.semester.toLowerCase().includes(text.toLowerCase())
-      );
+          list?.name.toLowerCase().includes(this.filterModuleName) 
+      )
+      .filter((list) => list?.lecturer.toLowerCase().includes(this.filterLecturerName))
+      .filter((list) => list?.program_id.toLowerCase().includes(this.filterProgramId))
+      .filter((list) => list?.intake.toString().toLowerCase().includes(this.filterIntake))
+      .filter((list) => list?.semester.toLowerCase().includes(this.filterSemester))
+      
+      this.filteredLecturerModules = this.lecturerModuleList.filter(
+        (list) =>
+          list?.name.toLowerCase().includes(this.filterModuleName) 
+      )
+      .filter((list) => list?.lecturer.toLowerCase().includes(this.filterLecturerName))
+      .filter((list) => list?.program_id.toLowerCase().includes(this.filterProgramId))
+      .filter((list) => list?.intake.toString().toLowerCase().includes(this.filterIntake))
+      .filter((list) => list?.semester.toLowerCase().includes(this.filterSemester))
+
+      this.filteredCourses = this.coursesList.filter(
+        (list) =>
+          list?.name.toLowerCase().includes(this.filterModuleName) 
+      )
+      .filter((list) => list?.lecturer.toLowerCase().includes(this.filterLecturerName))
+      .filter((list) => list?.program_id.toLowerCase().includes(this.filterProgramId))
+      .filter((list) => list?.intake.toString().toLowerCase().includes(this.filterIntake))
+      .filter((list) => list?.semester.toLowerCase().includes(this.filterSemester))
+      
       if(this.filteredAllModules.length === 0){
         this.listEmpty = true;
       }else this.listEmpty = false;
-    }
   }
 }
