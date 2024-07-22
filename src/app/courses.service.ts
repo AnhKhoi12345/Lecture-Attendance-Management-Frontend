@@ -12,6 +12,9 @@ import { UserInterface } from './interfaces/user';
 import { UserFirebaseInterface } from './interfaces/userFirebaseAccount';
 import { ModuleInterface } from './interfaces/module';
 import { LecturerInterface } from './interfaces/lecturer';
+import { SemesterInterface } from './interfaces/semester';
+import { ProgramModuleInterface } from './interfaces/programModule';
+import { ModuleWithIdInterface } from './interfaces/moduleWithId';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -88,6 +91,13 @@ export class CoursesService {
     return this.http.post<ModuleInterface>(
       `/api/module`,
       { name, capacity, etcs, lecturer_id},
+      httpOptions,
+    );
+  }
+  createProgramModule( program_id: string, module_id:string, sem_id:string, intake:Date): Observable<ProgramModuleInterface> {
+    return this.http.post<ProgramModuleInterface>(
+      `/api/program-module`,
+      { program_id, module_id, sem_id, intake},
       httpOptions,
     );
   }
@@ -182,4 +192,42 @@ export class CoursesService {
   // }
   return this.http.get<LecturerInterface[]>(`/api/lecturer/${lecturer_name}`)
   }
+  getModuleByName(module_name:string): Observable<ModuleWithIdInterface[]> {
+    //   return new Observable<LecturerInterface[]>(observer => {
+    //     this.authService.user$.subscribe(user => {
+    //       user && user.getIdToken().then(token => {
+    //         if (user && token){
+    //            this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+    //            .subscribe(attendance => {
+    //             observer.next(attendance);
+    //            });
+  
+    //         }else{
+    //           observer.next([]);
+    //         }
+    //       })
+    //     })
+    //   })
+    // }
+    return this.http.get<ModuleWithIdInterface[]>(`/api/module/${module_name}`)
+    }
+    getSemesterId(sem_type:string, sem_start:Date, sem_end:Date): Observable<SemesterInterface[]> {
+      //   return new Observable<LecturerInterface[]>(observer => {
+      //     this.authService.user$.subscribe(user => {
+      //       user && user.getIdToken().then(token => {
+      //         if (user && token){
+      //            this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+      //            .subscribe(attendance => {
+      //             observer.next(attendance);
+      //            });
+    
+      //         }else{
+      //           observer.next([]);
+      //         }
+      //       })
+      //     })
+      //   })
+      // }
+      return this.http.get<SemesterInterface[]>(`/api/semester/${sem_type}/${sem_start}/${sem_end}`)
+      }
 }

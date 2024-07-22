@@ -9,6 +9,10 @@ import { ModuleInterface } from '../interfaces/module';
 import { CoursesService } from '../courses.service';
 import { LecturerInterface } from '../interfaces/lecturer';
 import { ModuleLecturerNameInterface } from '../interfaces/moduleLecturerName';
+import { ProgramModuleInterface } from '../interfaces/programModule';
+import { SemesterInterface } from '../interfaces/semester';
+import { ProgramModuleCSVInterface } from '../interfaces/programModuleCSV';
+import { ModuleWithIdInterface } from '../interfaces/moduleWithId';
 @Component({
   selector: 'app-manage-module',
   standalone: true,
@@ -17,18 +21,18 @@ import { ModuleLecturerNameInterface } from '../interfaces/moduleLecturerName';
   styleUrl: './manage-module.component.scss'
 })
 export class ManageModuleComponent {
-  @ViewChild('fileUploadSimple') input!:ElementRef<HTMLInputElement>;
-  listEmpty: boolean = true;
+  @ViewChild('fileUploadModule') inputModule!:ElementRef<HTMLInputElement>;
+  @ViewChild('fileUploadProgramModule') inputProgramModule!:ElementRef<HTMLInputElement>;
+  moduleListEmpty: boolean = true;
+  programModuleListEmpty: boolean = true;
   authService = inject(AuthService);
   route: ActivatedRoute = inject(ActivatedRoute);
   coursesService: CoursesService = inject(CoursesService);
   lecturer:LecturerInterface[] = [];
-  public importedData: Array<ModuleLecturerNameInterface> = [];
-  // public arrayWithSimpleData: Array<CoursesList> = [
-  //   { module_id: "1",name: 'Math', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-  //   { module_id: "2",name: 'English', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-  //   { module_id: "3",name: 'Code', semester: 'summer', lecturer: 'Bob',start_date: "6/9", end_date: "9/6"},
-  // ];
+  module: ModuleWithIdInterface[] = [];
+  semester: SemesterInterface[] = [];
+   public importedModule: Array<ModuleLecturerNameInterface> = [];
+  public importedModuleProgram: Array<ProgramModuleCSVInterface> = [];
   _csvService = inject(CsvService)
   constructor() {}
 //   public saveDataInCSV(name: string, data: Array<any>): void {
@@ -40,11 +44,17 @@ export class ManageModuleComponent {
 //     hiddenElement.download = name + '.csv';
 //     hiddenElement.click();
 // }
-public async importDataFromCSV(event: any) {
+public async importModuleFromCSV(event: any) {
   let fileContent = await this.getTextFromFile(event);
-  this.importedData = this._csvService.importDataFromCSV(fileContent);
-  console.log(this.importedData);
-  this.listEmpty = false
+  this.importedModule = this._csvService.importDataFromCSV(fileContent);
+  console.log(this.importedModule);
+  this.moduleListEmpty = false
+}
+public async importProgramModuleFromCSV(event: any) {
+  let fileContent = await this.getTextFromFile(event);
+  this.importedModuleProgram = this._csvService.importDataFromCSV(fileContent);
+  console.log(this.importedModuleProgram);
+  this.programModuleListEmpty = false
 }
 private async getTextFromFile(event: any) {
   const file: File = event.target.files[0];
@@ -52,40 +62,77 @@ private async getTextFromFile(event: any) {
 
   return fileContent;
 }
-//   createModuleFromCSV():void{
-//     if( this.importedData.length > 0  ) {
-//     for (let index = 0; index < this.importedData.length-1; index++){
-//       const element = this.importedData[index];
-//       console.log(element);
-//       this.coursesService.createModule( element.name, element.capacity, element.etcs, element.lecturer_name).subscribe(()=>{
-        
-//       })
-//   }
-//    alert("Upload completed!")
-// } else alert("Empty CSV file")
-// }
 createModuleFromCSV():void{
-  if( this.importedData.length > 0  ) {
-  for (let index = 0; index < this.importedData.length-1; index++){
-    const element = this.importedData[index];
+  if( this.importedModule.length > 0  ) {
+  for (let index = 0; index < this.importedModule.length-1; index++){
+    const element = this.importedModule[index];
     this.coursesService.getLecturerByName(element.lecturer_name ).subscribe( (lecturer)=>{
       this.lecturer =lecturer
       // console.log(this.lecturer)
-      this.coursesService.createModule( element.name, element.capacity, element.etcs, this.lecturer[0].staff_id).subscribe(()=>{
-      
+      this.coursesService.createModule( element.name, element.capacity, element.etcs, this.lecturer[0].staff_id).subscribe((module)=>{
+      console.log(module)
     })
     }
 )}
- alert("Upload completed!")
+
+ alert("Upload module completed!")
 } else alert("Empty CSV file")
 }
-clearCSV():void{
-  this.input.nativeElement.value = "";
-  this.importedData = [];
-  this.listEmpty = true;
-}
-// ngOnInit(): void {
-//   this.coursesService.getLecturerByName("Tran Hong Ngoc").subscribe( lecturer=> this.lecturer =lecturer)
 
-// }
+createProgramModule():void{
+  if( this.importedModuleProgram.length > 0  ) {
+  for (let index = 0; index < this.importedModuleProgram.length-1; index++){
+    const element = this.importedModuleProgram[index];
+    console.log(element.module_name)
+    this.coursesService.getModuleByName(element.module_name ).subscribe( (module)=>{
+      this.module = module
+      console.log("module info: " + this.module[0].module_id)
+      this.coursesService.getSemesterId( element.sem_type, element.sem_start, element.sem_end).subscribe((semester)=>{
+        this.semester = semester
+        console.log("semester info: " +this.semester[0].sem_id)
+        this.coursesService.createProgramModule(element.program_id, this.module[0].module_id, this.semester[0].sem_id, element.intake).subscribe(()=>{
+        })
+      })
+    
+    }
+  )}
+    alert("Upload program module completed!")
+}else alert("Empty CSV file")
+}
+
+
+clearModuleCSV():void{
+  this.inputModule.nativeElement.value = "";
+  this.importedModule = [];
+  this.moduleListEmpty = true;
+}
+clearProgramModuleCSV():void{
+  this.inputProgramModule.nativeElement.value = "";
+  this.importedModuleProgram = [];
+  this.programModuleListEmpty = true;
+}
+todayDate(){
+  var q = new Date();
+var m = q.getMonth();
+var d = q.getDate();
+var y = q.getFullYear();
+
+// var date = new Date(y,m,d);
+// console.log();
+let date1 = new Date("2019-07-05");
+let date2 = new Date(y,m,d);
+console.log(date1 +" "+ date2);
+let Difference_In_Time =
+  date2.getTime() - date1.getTime();
+let Difference_In_Days =
+  Math.round
+      (Difference_In_Time / (1000 * 3600 * 24));
+
+console.log
+("Total number of days between dates:\n" +
+    date1.toDateString() + " and " +
+    date2.toDateString() +
+    " is: " + Difference_In_Days + " days");
+}
+
 }

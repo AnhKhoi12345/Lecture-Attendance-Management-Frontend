@@ -6,67 +6,103 @@
       <!-- <br /><br /> -->
       <h1></h1>
       <h2>1. INSERT MODULE</h2>
+      <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to module table in the database. The file should have 5 column with header: name, capacity, etcs, lecturer_name(to fetch lecturer_id) and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
       <input
-        #fileUploadSimple
+        #fileUploadModule
         [accept]="'.csv'"
         type="file"
         class="file-input"
-        (change)="importDataFromCSV($event)"
+        (change)="importModuleFromCSV($event)"
         hidden="true"
       />
-      <button class="import-csv-button" (click)="fileUploadSimple.click()">Import from CSV</button>
+      <button class="import-csv-button" (click)="fileUploadModule.click()">Import from CSV</button>
       <br /><br />
       
       <h3>Data from CSV:</h3>
-      <!-- <div *ngFor="let item of importedData">
-        {{ item | json }}
-      </div> -->
-      <div class="attendance-container">
+      <div class="module-csv-container">
       <div class="column-name">
-        <h4 class="class-number">MODULE NAME</h4>
-        <h4 class="class-date">CAPACITY</h4>
-        <h4 class="class-time">ETCS</h4>
-        <h4 class="class-action">LECTURER</h4>
+        <h4 class="class-module">MODULE NAME</h4>
+        <h4 class="class-capacity">CAPACITY</h4>
+        <h4 class="class-etcs">ETCS</h4>
+        <h4 class="class-lecturer">LECTURER</h4>
       </div>
-      <p class="no-student" *ngIf="listEmpty === true">No CSV file</p>
-      <div class="attendance-data" *ngFor="let item of importedData">
+      <p class="no-student" *ngIf="moduleListEmpty === true">No CSV file</p>
+      <div class="attendance-data" *ngFor="let item of importedModule| slice:0:importedModule.length-1">
         <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
           <div class="row-data">
-            <div class="column data-number">{{ item.name }}</div>
-            <div class="column data-date">{{ item.capacity }}</div>
-            <div class="column data-time">
+            <div class="column data-module">{{ item.name }}</div>
+            <div class="column data-capacity">{{ item.capacity }}</div>
+            <div class="column data-etcs">
               {{ item.etcs}}
             </div>
-            <div class="column action">
+            <div class="column data-lecturer">
               {{ item.lecturer_name}}
             </div>
           </div>
         <!-- </a> -->
         <hr />
       </div>
-      <!-- <div class="attendance-data">
-          <div class="row-data">
-            <div class="column data-number">{{ lecturer.name }}</div>
-            <div class="column data-date">{{ lecturer.staff_id }}</div>
-          </div>
-        <hr />
-      </div> -->
     </div>
-    <!-- <div class="attendance-container">
-      <div class="column-name">
-        <h4 class="class-number">Lecturer Name</h4>
-      </div>
-      <div class="attendance-data"  *ngFor="let item of lecturer">
-          <div class="row-data">
-            <div class="column data-number">{{ item.name }}</div>
-          </div>
-        <hr />
-      </div>
-    </div> -->
       <br /><br />
       <div class="csv-action">
         <button class="upload-database-button" (click)="createModuleFromCSV()">Upload to the Database</button>
-        <button class="clear-csv-button" (click)="clearCSV()">Clear CSV Data</button>
+        <button class="clear-csv-button" (click)="clearModuleCSV()">Clear CSV Data</button>
       </div>
+      <br /><br />
+      <hr />
+            <br /><br />
+            <h1></h1>
+            <h2>2. INSERT PROGRAM MODULE</h2>
+            <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to program_modules table in the database. The file should have 6 column with header: program_id, module_name(to fetch module_id), sem_type, sem_start and sem_end (to fetch semester ID), intake name and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
+            <input
+              #fileUploadProgramModule
+              [accept]="'.csv'"
+              type="file"
+              class="file-input"
+              (change)="importProgramModuleFromCSV($event)"
+              hidden="true"
+            />
+            <button class="import-csv-button" (click)="fileUploadProgramModule.click()">Import from CSV</button>
+            <br /><br />
+            
+            <h3>Data from CSV:</h3>
+            <div class="program-module-csv-container">
+            <div class="column-name">
+              <h4 class="class-program">PROGRAM ID</h4>
+              <h4 class="class-module">MODULE NAME</h4>
+              <h4 class="class-semester">SEMESTER</h4>
+              <h4 class="class-semester-start">SEMESTER START</h4>
+              <h4 class="class-semester-end">SEMESTER END</h4>
+              <h4 class="class-intake">INTAKE</h4>
+            </div>
+            <p class="no-student" *ngIf="programModuleListEmpty === true">No CSV file</p>
+            <div class="attendance-data" *ngFor="let item of importedModuleProgram | slice:0:importedModuleProgram.length-1">
+              <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
+                <div class="row-data">
+                  <div class="column data-program">{{ item.program_id }}</div>
+                  <div class="column data-module">{{ item.module_name }}</div>
+                  <div class="column data-semester">
+                    {{ item.sem_type}}
+                  </div>
+                  <div class="column data-semester-start">
+                    {{ item.sem_start}}
+                  </div>
+                  <div class="column data-semester-end">
+                    {{ item.sem_end}}
+                  </div>
+                  <div class="column data-intake">
+                    {{ item.intake}}
+                  </div>
+                </div>
+              <!-- </a> -->
+              <hr />
+            </div>
+          </div>
+            <br /><br />
+            <div class="csv-action">
+              <button class="upload-database-button" (click)="createProgramModule()">Upload to the Database</button>
+              <button class="clear-csv-button" (click)="clearProgramModuleCSV()">Clear CSV Data</button>
+            </div>
+            <button class="clear-csv-button" (click)="todayDate()">DATE</button>
 </div>
 }

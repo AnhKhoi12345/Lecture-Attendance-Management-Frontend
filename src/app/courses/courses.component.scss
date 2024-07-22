@@ -79,13 +79,10 @@
       display: flex;
       justify-content: space-between;
       .course-id {
-        flex: 2;
-      }
-      .course-code {
-        flex: 2;
+        flex: 1;
       }
       .course-name {
-        flex: 4;
+        flex: 3;
       }
       .course-program{
         flex: 1;
@@ -94,7 +91,7 @@
         flex: 1;
       }
       .course-semester {
-        flex: 2;
+        flex: 1;
       }
       .course-lecturer {
         flex: 3;
@@ -122,13 +119,10 @@
           color: red;
         }
         .data-id {
-          flex: 2;
-        }
-        .data-code {
-          flex: 2;
+          flex: 1;
         }
         .data-name {
-          flex: 4;
+          flex: 3;
         }
         .data-program {
           flex: 1;
@@ -137,7 +131,7 @@
           flex: 1;
         }
         .data-semester {
-          flex: 2;
+          flex: 1;
         }
         .data-lecturer {
           flex: 3;
