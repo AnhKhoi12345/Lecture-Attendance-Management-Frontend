@@ -1,6 +1,7 @@
 @if(authService.currentUserSig()) {
     <div class="register-container">
-<h1>Register user</h1>
+<h1>I. REGISTER USERS ACCOUNT</h1>
+<h2 class="register-title">1. Register an account</h2>
 @if(errorMessage){
     <div>{{errorMessage}}</div>
 }
@@ -29,5 +30,55 @@
         <button class="register-button" type="submit">Sign Up</button>
     </div>
 </form>
+<br /><br />
+<hr />
+      <br /><br />
+      <h2>2. Register multiple account</h2>
+      <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to program_modules table in the database. The file should have 6 column with header: program_id, module_name(to fetch module_id), sem_type, sem_start and sem_end (to fetch semester ID), intake name and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
+      <input
+        #fileUploadAccounts
+        [accept]="'.csv'"
+        type="file"
+        class="file-input"
+        (change)="importAccountsfromCSV($event)"
+        hidden="true"
+      />
+      <button class="import-csv-button" (click)="fileUploadAccounts.click()">Import from CSV</button>
+      <br /><br />
+      
+      <h3>Data from CSV:</h3>
+      <div class="account-csv-container">
+      <div class="column-name">
+        <h4 class="class-id">SCHOOL ID</h4>
+        <h4 class="class-username">USERNAME</h4>
+        <h4 class="class-email">EMAIL</h4>
+        <h4 class="class-password">PASSWORD</h4>
+        <h4 class="class-role">ROLE</h4>
+      </div>
+      <p class="no-student" *ngIf="accountListEmpty === true">No CSV file</p>
+      <div class="attendance-data" *ngFor="let item of importedAccount | slice:0:importedAccount.length-1">
+        <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
+          <div class="row-data">
+            <div class="column data-id">{{ item.school_id }}</div>
+            <div class="column data-username">{{ item.username}}</div>
+            <div class="column data-email">
+              {{ item.email}}
+            </div>
+            <div class="column data-password">
+              {{ item.password}}
+            </div>
+            <div class="column data-role">
+              {{ item.role}}
+            </div>
+          </div>
+        <!-- </a> -->
+        <hr />
+      </div>
+    </div>
+      <br /><br />
+      <div class="csv-action">
+        <button class="upload-database-button" (click)="createModuleFromCSV()">Sign up and Upload to the Database</button>
+        <button class="clear-csv-button" (click)="clearAccountsCSV()">Clear CSV Data</button>
+      </div>
     </div>
 }

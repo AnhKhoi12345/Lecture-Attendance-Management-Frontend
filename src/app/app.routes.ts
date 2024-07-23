@@ -6,6 +6,9 @@ import { ClassAttendanceComponent } from './class-attendance/class-attendance.co
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ManageModuleComponent } from './manage-module/manage-module.component';
+import { ManageLecturerComponent } from './manage-lecturer/manage-lecturer.component';
+import { ManageSemesterComponent } from './manage-semester/manage-semester.component';
+import { ManageProgramComponent } from './manage-program/manage-program.component';
 
 export const routes: Routes = [
   {
@@ -50,9 +53,27 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'managemodule',
+    path: 'manage-module',
     component: ManageModuleComponent,
     title: 'Manage Module',
+    pathMatch: 'full',
+  },
+  {
+    path: 'manage-lecturer',
+    component: ManageLecturerComponent,
+    title: 'Manage Lecturer',
+    pathMatch: 'full',
+  },
+  {
+    path: 'manage-semester',
+    component: ManageSemesterComponent,
+    title: 'Manage Lecturer',
+    pathMatch: 'full',
+  },
+  {
+    path: 'manage-program',
+    component: ManageProgramComponent,
+    title: 'Manage Program',
     pathMatch: 'full',
   },
 ];

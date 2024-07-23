@@ -1,0 +1,48 @@
+@if(authService.currentUserSig()) {
+    <div class="manage-course-content">
+        <!-- <button (click)="saveDataInCSV('simpleData', arrayWithSimpleData)">
+            Save simple data array
+          </button> -->
+          <!-- <br /><br /> -->
+          <h1></h1>
+          <h2>1. CREATE SEMESTER</h2>
+          <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to module table in the database. The file should have 5 column with header: name, capacity, etcs, lecturer_name(to fetch lecturer_id) and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
+          <input
+            #fileUploadSemester
+            [accept]="'.csv'"
+            type="file"
+            class="file-input"
+            (change)="importSemesterFromCSV($event)"
+            hidden="true"
+          />
+          <button class="import-csv-button" (click)="fileUploadSemester.click()">Import from CSV</button>
+          <br /><br />
+          
+          <h3>Data from CSV:</h3>
+          <div class="module-csv-container">
+          <div class="column-name">
+            <h4 class="class-type">SEMESTER TYPE</h4>
+            <h4 class="class-start">START DATE</h4>
+            <h4 class="class-end">END DATE</h4>
+          </div>
+          <p class="no-student" *ngIf="semesterListEmpty === true">No CSV file</p>
+          <div class="attendance-data" *ngFor="let item of importedSemester| slice:0:importedSemester.length-1">
+            <!-- <a [routerLink]="['/courses', class.module_id, class.class_date]"> -->
+              <div class="row-data">
+                <div class="column data-type">{{ item.sem_type }}</div>
+                <div class="column data-start">{{ item.start_date }}</div>
+                <div class="column data-end">
+                  {{ item.end_date}}
+                </div>
+              </div>
+            <!-- </a> -->
+            <hr />
+          </div>
+        </div>
+          <br /><br />
+          <div class="csv-action">
+            <button class="upload-database-button" (click)="createSemesterFromCSV()">Upload to the Database</button>
+            <button class="clear-csv-button" (click)="clearSemesterCSV()">Clear CSV Data</button>
+          </div>
+</div>
+}

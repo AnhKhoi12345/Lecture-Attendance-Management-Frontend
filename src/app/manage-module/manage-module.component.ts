@@ -111,28 +111,28 @@ clearProgramModuleCSV():void{
   this.importedModuleProgram = [];
   this.programModuleListEmpty = true;
 }
-todayDate(){
-  var q = new Date();
-var m = q.getMonth();
-var d = q.getDate();
-var y = q.getFullYear();
+// todayDate(){
+//   var q = new Date();
+// var m = q.getMonth();
+// var d = q.getDate();
+// var y = q.getFullYear();
 
-// var date = new Date(y,m,d);
-// console.log();
-let date1 = new Date("2019-07-05");
-let date2 = new Date(y,m,d);
-console.log(date1 +" "+ date2);
-let Difference_In_Time =
-  date2.getTime() - date1.getTime();
-let Difference_In_Days =
-  Math.round
-      (Difference_In_Time / (1000 * 3600 * 24));
+// // var date = new Date(y,m,d);
+// // console.log();
+// let date1 = new Date("2019-07-05");
+// let date2 = new Date(y,m,d);
+// console.log(date1 +" "+ date2);
+// let Difference_In_Time =
+//   date2.getTime() - date1.getTime();
+// let Difference_In_Days =
+//   Math.round
+//       (Difference_In_Time / (1000 * 3600 * 24));
 
-console.log
-("Total number of days between dates:\n" +
-    date1.toDateString() + " and " +
-    date2.toDateString() +
-    " is: " + Difference_In_Days + " days");
-}
+// console.log
+// ("Total number of days between dates:\n" +
+//     date1.toDateString() + " and " +
+//     date2.toDateString() +
+//     " is: " + Difference_In_Days + " days");
+// }
 
 }

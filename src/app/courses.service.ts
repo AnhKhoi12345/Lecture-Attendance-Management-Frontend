@@ -15,6 +15,8 @@ import { LecturerInterface } from './interfaces/lecturer';
 import { SemesterInterface } from './interfaces/semester';
 import { ProgramModuleInterface } from './interfaces/programModule';
 import { ModuleWithIdInterface } from './interfaces/moduleWithId';
+import { SemesterCSVInterface } from './interfaces/semesterCSV';
+import { ProgramInterface } from './interfaces/program';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -98,6 +100,27 @@ export class CoursesService {
     return this.http.post<ProgramModuleInterface>(
       `/api/program-module`,
       { program_id, module_id, sem_id, intake},
+      httpOptions,
+    );
+  }
+  createLecturer( staff_id: string, name:string, program_id:string): Observable<LecturerInterface> {
+    return this.http.post<LecturerInterface>(
+      `/api/lecturer`,
+      { staff_id, name, program_id},
+      httpOptions,
+    );
+  }
+  createSemester( sem_type: string, start_date:Date, end_date:Date): Observable<SemesterCSVInterface> {
+    return this.http.post<SemesterCSVInterface>(
+      `/api/semester`,
+      { sem_type, start_date, end_date},
+      httpOptions,
+    );
+  }
+  createProgram( program_id: string, name:string, duration:string): Observable<ProgramInterface> {
+    return this.http.post<ProgramInterface>(
+      `/api/program`,
+      { program_id, name, duration},
       httpOptions,
     );
   }
