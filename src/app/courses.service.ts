@@ -17,6 +17,11 @@ import { ProgramModuleInterface } from './interfaces/programModule';
 import { ModuleWithIdInterface } from './interfaces/moduleWithId';
 import { SemesterCSVInterface } from './interfaces/semesterCSV';
 import { ProgramInterface } from './interfaces/program';
+import { ClassInterface } from './interfaces/class';
+import { StudentInterface } from './interfaces/student';
+import { ModuleEnrollInterface } from './interfaces/moduleEnroll';
+import { ProgramRegisteringlInterface } from './interfaces/programRegistering';
+import { IntaketInterface } from './interfaces/intake';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -41,40 +46,7 @@ export class CoursesService {
   getClasses(id:string): Observable<Classes[]> {
     return this.http.get<Classes[]>(`/api/modules/${id}`)
   }
-  getAttendanceListForStudent(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
-    return new Observable<AttendanceList[]>(observer => {
-      this.authService.user$.subscribe(user => {
-        user && user.getIdToken().then(token => {
-          if (user && token){
-             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
-             .subscribe(attendance => {
-              observer.next(attendance);
-             });
 
-          }else{
-            observer.next([]);
-          }
-        })
-      })
-    })
-  }
-  getAttendanceList(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
-    return new Observable<AttendanceList[]>(observer => {
-      this.authService.user$.subscribe(user => {
-        user && user.getIdToken().then(token => {
-          if (user && token){
-             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
-             .subscribe(attendance => {
-              observer.next(attendance);
-             });
-
-          }else{
-            observer.next([]);
-          }
-        })
-      })
-    })
-  }
   createAccount(acc_id:string, school_id: string, username:string, email:string, password:string, role: string ): Observable<UserAccountInterface> {
     return this.http.post<UserAccountInterface>(
       `/api/accounts`,
@@ -123,6 +95,75 @@ export class CoursesService {
       { program_id, name, duration},
       httpOptions,
     );
+  }
+  createClass( module_id: string, class_date:Date, start_time:string,end_time:string): Observable<ClassInterface> {
+    return this.http.post<ClassInterface>(
+      `/api/class`,
+      { module_id, class_date, start_time,end_time},
+      httpOptions,
+    );
+  }
+  createStudent( student_id: string, name:string, image_location:string): Observable<StudentInterface> {
+    return this.http.post<StudentInterface>(
+      `/api/student`,
+      { student_id, name, image_location},
+      httpOptions,
+    );
+  }
+  createModuleEnroll( student_id: string, module_id:string): Observable<ModuleEnrollInterface> {
+    return this.http.post<ModuleEnrollInterface>(
+      `/api/module-enroll`,
+      { student_id, module_id},
+      httpOptions,
+    );
+  }
+  createProgramRegistering( student_id: string, program_id:string, intake:Date): Observable<ProgramRegisteringlInterface> {
+    return this.http.post<ProgramRegisteringlInterface>(
+      `/api/program-registering`,
+      { student_id, program_id, intake},
+      httpOptions,
+    );
+  }
+  createIntake( year: string): Observable<IntaketInterface> {
+    return this.http.post<IntaketInterface>(
+      `/api/intake`,
+      { year},
+      httpOptions,
+    );
+  }
+  getAttendanceListForStudent(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
+    return new Observable<AttendanceList[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/student/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(attendance => {
+              observer.next(attendance);
+             });
+
+          }else{
+            observer.next([]);
+          }
+        })
+      })
+    })
+  }
+  getAttendanceList(courseId:string, classDate:string, classStart:string): Observable<AttendanceList[]> {
+    return new Observable<AttendanceList[]>(observer => {
+      this.authService.user$.subscribe(user => {
+        user && user.getIdToken().then(token => {
+          if (user && token){
+             this.http.get<AttendanceList[]>(`/api/modules/${courseId}/${classDate}/${classStart}/lecturer/${user.uid}`, httpOptionsWithAuthToken(token))
+             .subscribe(attendance => {
+              observer.next(attendance);
+             });
+
+          }else{
+            observer.next([]);
+          }
+        })
+      })
+    })
   }
   getAccount(): Observable<UserAccountInterface[]> {
     return new Observable<UserAccountInterface[]>(observer => {

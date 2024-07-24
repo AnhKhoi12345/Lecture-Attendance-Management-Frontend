@@ -1,15 +1,12 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { CsvService } from '../csv.service';
-import { CoursesList } from '../interfaces/coursesList';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
-import { ModuleInterface } from '../interfaces/module';
 import { CoursesService } from '../courses.service';
 import { LecturerInterface } from '../interfaces/lecturer';
 import { ModuleLecturerNameInterface } from '../interfaces/moduleLecturerName';
-import { ProgramModuleInterface } from '../interfaces/programModule';
 import { SemesterInterface } from '../interfaces/semester';
 import { ProgramModuleCSVInterface } from '../interfaces/programModuleCSV';
 import { ModuleWithIdInterface } from '../interfaces/moduleWithId';

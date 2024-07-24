@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CoursesService } from '../courses.service';
 import { CsvService } from '../csv.service';
@@ -8,10 +8,11 @@ import { LecturerInterface } from '../interfaces/lecturer';
 import { AuthService } from '../auth.service';
 import { SemesterCSVInterface } from '../interfaces/semesterCSV';
 import { ProgramInterface } from '../interfaces/program';
+// import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-manage-program',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule,ReactiveFormsModule],
   templateUrl: './manage-program.component.html',
   styleUrl: './manage-program.component.scss'
 })
@@ -24,6 +25,12 @@ export class ManageProgramComponent {
   program:ProgramInterface[] = [];
    public importedProgram: Array<ProgramInterface> = [];
   csvService = inject(CsvService)
+  fb = inject(FormBuilder);
+  form = this.fb.nonNullable.group({
+    year: ['',Validators.required],
+    // month: [0,Validators.required],
+    // date: [0,Validators.required],
+  })
   constructor() {}
 //   public saveDataInCSV(name: string, data: Array<any>): void {
 //     let csvContent = this._csvService.saveDataInCSV(data);
@@ -65,4 +72,12 @@ clearProgramCSV():void{
   this.importedProgram = [];
   this.programListEmpty = true;
 }
+onSubmit(): void {
+  const rawForm = this.form.getRawValue();
+  console.log(rawForm.year)
+  this.coursesService.createIntake(rawForm.year).subscribe({
+      })
+      
+}
+
 }

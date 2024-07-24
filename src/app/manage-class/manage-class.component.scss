@@ -33,15 +33,18 @@
           display: flex;
           justify-content: space-between;
           // position: absolute;
-          .class-type {
-            flex: 1;
+          .class-module {
+            flex: 3;
+          }
+          .class-date {
+            flex: 2;
           }
           .class-start {
             flex: 2;
           }
           .class-end {
-            flex: 2;
-          }
+              flex: 2;
+            }
         }
         .no-student{
           color: red;
@@ -66,44 +69,47 @@
               color: red;
               padding-top: 5px;
             }
-            .data-type {
-              flex: 1;
+            .data-module {
+              flex: 3;
+            }
+            .data-date {
+              flex: 2;
             }
             .data-start {
               flex: 2;
             }
             .data-end {
-              flex: 2;
-            }
+                flex: 2;
+              }
+
           }
         }
       }
-
       .csv-action{
-      .upload-database-button{
+        .upload-database-button{
+          height: 40px;
+          width: 180px;
+          margin-top: 60px;
+          border-radius: 5px;
+          border-color: rgb(0, 255, 0);
+          background-color: rgb(122, 255, 122);
+          cursor: pointer;
+      }
+      .upload-database-button:active{
+        background-color: rgb(205, 255, 205);
+      }
+      .clear-csv-button{
+        margin-left: 30px;
         height: 40px;
         width: 180px;
         margin-top: 60px;
         border-radius: 5px;
-        border-color: rgb(0, 255, 0);
-        background-color: rgb(122, 255, 122);
+        border-color: red;
+        background-color: rgb(255, 122, 122);
         cursor: pointer;
     }
-    .upload-database-button:active{
-      background-color: rgb(205, 255, 205);
+    .clear-csv-button:active{
+      background-color: rgb(255, 206, 206);
     }
-    .clear-csv-button{
-      margin-left: 30px;
-      height: 40px;
-      width: 180px;
-      margin-top: 60px;
-      border-radius: 5px;
-      border-color: red;
-      background-color: rgb(255, 122, 122);
-      cursor: pointer;
+    }
   }
-  .clear-csv-button:active{
-    background-color: rgb(255, 206, 206);
-  }
-  }
-}

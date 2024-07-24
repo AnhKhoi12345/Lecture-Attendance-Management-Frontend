@@ -1,5 +1,6 @@
 .manage-course-content {
     padding: 50px;
+    background-color:    #F4F5F7;
     margin-top: 120px;
     .module-instruction{
       margin-top: 20px;
@@ -17,9 +18,10 @@
       background-color: rgb(255, 238, 206);
     }
     .module-csv-container {
-      box-shadow: 10px 20px 3px rgb(255, 209, 125);
+      // box-shadow: 10px 20px 3px rgb(255, 209, 125);
       border-radius: 20px;
-        border: 2px solid orange;
+        // border: 2px solid orange;
+        background-color: white;
         padding: 50px;
         width: 90%;
         margin-top: 50px;

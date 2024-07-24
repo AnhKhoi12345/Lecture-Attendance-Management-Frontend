@@ -33,15 +33,27 @@
           display: flex;
           justify-content: space-between;
           // position: absolute;
-          .class-type {
+          .class-module {
+            flex: 3;
+          }
+          .class-capacity {
             flex: 1;
           }
-          .class-start {
-            flex: 2;
+          .class-etcs {
+            flex: 1;
           }
-          .class-end {
-            flex: 2;
-          }
+          .class-lecturer {
+              flex: 2;
+            }
+            .class-program {
+              flex: 1;
+            }
+            .class-intake {
+              flex: 2;
+            }
+            .class-semester {
+              flex: 1;
+            }
         }
         .no-student{
           color: red;
@@ -66,18 +78,86 @@
               color: red;
               padding-top: 5px;
             }
-            .data-type {
+            .data-module {
+              flex: 3;
+            }
+            .data-capacity {
               flex: 1;
             }
-            .data-start {
-              flex: 2;
+            .data-etcs {
+              flex: 1;
             }
-            .data-end {
-              flex: 2;
-            }
+            .data-lecturer {
+                flex: 2;
+              }
+              .data-program {
+                flex: 1;
+              }
+              .data-intake {
+                flex: 2;
+              }
+              .data-semester {
+                flex: 1;
+              }
           }
         }
       }
+
+      .program-module-csv-container {
+        // box-shadow: 10px 20px 3px rgb(255, 209, 125);
+        border-radius: 20px;
+          // border: 2px solid orange;
+          background-color: white;
+          padding: 50px;
+          width: 90%;
+          margin-top: 50px;
+          height: 500px;
+          overflow: scroll;
+          // position: relative;
+          .column-name {
+  
+            display: flex;
+            justify-content: space-between;
+            // position: absolute;
+            .class-id {
+              flex: 1;
+            }
+            .class-module {
+              flex: 3;
+            }
+          }
+          .no-student{
+            color: red;
+            margin-top: 30px;
+    
+          }
+          .attendance-data {
+            .row-data {
+                
+              margin-top: 30px;
+              margin-bottom: 30px;
+              display: flex;
+              justify-content: space-between;
+              // flex-direction: row;
+      
+              .column {
+                  // border-right: 1px solid black;
+                color: black;
+              //   height: 60px;
+              }
+              .column:hover {
+                color: red;
+                padding-top: 5px;
+              }
+              .data-id {
+                flex: 1;
+              }
+              .data-module {
+                flex: 3;
+              }
+            }
+          }
+        }
 
       .csv-action{
       .upload-database-button{

@@ -9,6 +9,8 @@ import { ManageModuleComponent } from './manage-module/manage-module.component';
 import { ManageLecturerComponent } from './manage-lecturer/manage-lecturer.component';
 import { ManageSemesterComponent } from './manage-semester/manage-semester.component';
 import { ManageProgramComponent } from './manage-program/manage-program.component';
+import { ManageClassComponent } from './manage-class/manage-class.component';
+import { ManageStudentComponent } from './manage-student/manage-student.component';
 
 export const routes: Routes = [
   {
@@ -74,6 +76,18 @@ export const routes: Routes = [
     path: 'manage-program',
     component: ManageProgramComponent,
     title: 'Manage Program',
+    pathMatch: 'full',
+  },
+  {
+    path: 'manage-class',
+    component: ManageClassComponent,
+    title: 'Manage Classes',
+    pathMatch: 'full',
+  },
+  {
+    path: 'manage-student',
+    component: ManageStudentComponent,
+    title: 'Manage Student',
     pathMatch: 'full',
   },
 ];

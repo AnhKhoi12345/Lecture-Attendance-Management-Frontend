@@ -6,7 +6,7 @@
           <!-- <br /><br /> -->
           <h1></h1>
           <h2>1. CREATE PROGRAM</h2>
-          <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to module table in the database. The file should have 5 column with header: name, capacity, etcs, lecturer_name(to fetch lecturer_id) and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
+          <p class="module-instruction"><b>INSTRUCTION: </b>This is to import a cvs file to program table in the database. The file should have 4 column with header: program_id, name, duration and a null(empty) column. Each row below fill with data correspond to the header with the null row empty. Press Import from CSV, select the desire csv file then press Upload to the Database. Press Clear CSV Data if you want to cancel</p>
           <input
             #fileUploadProgram
             [accept]="'.csv'"
@@ -44,5 +44,16 @@
             <button class="upload-database-button" (click)="createProgramFromCSV()">Upload to the Database</button>
             <button class="clear-csv-button" (click)="clearProgramCSV()">Clear CSV Data</button>
           </div>
+          <form class="register-form" [formGroup] = "form" (ngSubmit) = "onSubmit()">
+            <h4>ID:</h4>
+            <div>
+                <input class="register-input" type="text" placeholder="year"  formControlName="year" required>
+                <!-- <input class="register-input" type="text" placeholder="month" formControlName="intake-month" required>
+                <input class="register-input" type="text" placeholder="date" formControlName="intake-date" required> -->
+            </div>
+            <div class="submit-button-container">
+                <button class="register-button" type="submit">Sign Up</button>
+            </div>
+        </form>
 </div>
 }
